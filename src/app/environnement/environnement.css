@@ -1,0 +1,81 @@
+.environment-section {
+  padding: 80px 20px;
+  background: linear-gradient(to bottom, #1565c0 0%, #002b80 40%);
+  color: #023047;
+  text-align: center;
+}
+
+.environment-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.environment-intro {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+}
+
+.environment-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.environment-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 300px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  text-align: left;
+}
+
+.environment-card:hover {
+  transform: translateY(-10px);
+}
+
+.environment-card .icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.environment-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #0077b6;
+}
+
+.environment-card p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.environment-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.environment-video {
+  margin-top: 50px;
+}
+
+.environment-card img {
+  width: 100%;
+  height: 220px;      /* FIXE LA HAUTEUR — à ajuster selon ton design */
+  object-fit: cover;  /* Évite les déformations et coupe proprement */
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.environment-card-content {
+  flex-grow: 1;
+  min-height: 180px;
+}
+

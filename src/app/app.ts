@@ -1,12 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+import { Accueil } from "./accueil/accueil";
+import { NotreMission } from "./notre-mission/notre-mission";
+import { Environnement } from "./environnement/environnement";
+import { Navbars } from "./navbar/navbar"; // chemin vers navbar.ts
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [ Accueil, NotreMission, Environnement, Navbars],  // ✅ clé du problème
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
-export class App {
-  protected readonly title = signal('pfa2');
-}
+export class AppComponent {}

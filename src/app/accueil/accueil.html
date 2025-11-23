@@ -1,0 +1,21 @@
+<section id="accueil" class="home-section">
+  <div class="home-content">
+    <h1 class="title">Bienvenue sur <span>MeduBot</span></h1>
+    <p class="subtitle">
+      Un Notre robot marin intelligent qui repére et ramasse les méduses pour des plages plus propres.
+    </p>
+    <button type="button" class="btn-home" (click)="openSignIn()">
+  <i class="fas fa-user-plus"></i> Connexion
+    </button>
+<p class="register-text">
+    Pas encore de compte ?
+    <a href="#" (click)="openCreateAccount(); $event.preventDefault()">
+      Créer un compte
+    </a>
+  </p>
+  </div>
+
+  <div class="home-image">
+    <img src="assets/images/medubot.png" alt="MeduBot robot" />
+  </div>
+</section>

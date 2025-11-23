@@ -1,0 +1,94 @@
+/* ====== SECTION PRINCIPALE ====== */
+.home-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 100px; /* ↓ réduit la marge haute */
+  background: linear-gradient(to bottom, #b3e5fc 0%, #64b5f6 40%);
+  min-height: 85vh;
+}
+
+/* ====== CONTENU TEXTE ====== */
+.home-content {
+  max-width: 600px;
+}
+
+.title {
+  font-size: 3.9rem; /* ↑ Titre plus grand */
+  font-weight: 700;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.title span {
+  color: #f8d35c; /* Couleur or */
+}
+
+.subtitle {
+  font-size: 1.9rem; /* ↑ Texte plus grand */
+  color: #e8f2ff;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* ====== BOUTON ====== */
+.btn-home {
+  background-color: #ffd166;
+  color: #1b1b1b;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-home i {
+  margin-right: 8px;
+}
+
+.btn-home:hover {
+  background-color: #ffca3a;
+  transform: translateY(-3px);
+}
+
+/* ====== IMAGE DU ROBOT ====== */
+.home-image img {
+  width: 650px; /* ↑ Image plus grande */
+  transition: transform 0.3s ease;
+}
+
+.home-image img:hover {
+  transform: scale(1.05);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 992px) {
+  .home-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 30px;
+  }
+
+  .home-image img {
+    width: 400px;
+    margin-top: 30px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .register-text {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: white;
+}
+}
+
+
