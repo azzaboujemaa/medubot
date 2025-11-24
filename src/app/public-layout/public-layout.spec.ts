@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Navbars } from './navbar';
+import { PublicLayout } from './public-layout';
 
-describe('Navbar', () => {
-  let component: Navbars;
-  let fixture: ComponentFixture<Navbars>;
+describe('PublicLayout', () => {
+  let component: PublicLayout;
+  let fixture: ComponentFixture<PublicLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Navbars]
+      imports: [PublicLayout]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Navbars);
+    fixture = TestBed.createComponent(PublicLayout);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,32 @@
+<div class="flex h-screen bg-gradient-to-br from-blue-900 to-blue-700 text-white">
+
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Content -->
+  <div class="flex-1 p-6 grid grid-cols-12 gap-6 auto-rows-max">
+
+    <!-- Robot Card -->
+    <div class="col-span-3">
+      <app-robot-card></app-robot-card>
+    </div>
+
+    <!-- Sensors Panel (Temp eau & Turbidité) -->
+    <div class="col-span-6 grid grid-cols-2 gap-4">
+      <app-sensors-panel></app-sensors-panel>
+    </div>
+
+    <!-- Weather placeholder removed -->
+    <!-- Camera -->
+    <div class="col-span-3">
+      <app-camera-panel></app-camera-panel>
+    </div>
+
+    <!-- Live Location -->
+    <div class="col-span-12 mt-4">
+      <app-map-panel></app-map-panel>
+    </div>
+
+  </div>
+</div>
+

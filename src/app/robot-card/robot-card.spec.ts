@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Navbars } from './navbar';
+import { RobotCard } from './robot-card';
 
-describe('Navbar', () => {
-  let component: Navbars;
-  let fixture: ComponentFixture<Navbars>;
+describe('RobotCard', () => {
+  let component: RobotCard;
+  let fixture: ComponentFixture<RobotCard>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Navbars]
+      imports: [RobotCard]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Navbars);
+    fixture = TestBed.createComponent(RobotCard);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

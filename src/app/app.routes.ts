@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
 
-import { Accueil } from './accueil/accueil';
-import { Navbars } from './navbar/navbar';
-import { NotreMission } from './notre-mission/notre-mission';
-import { Environnement } from './environnement/environnement';
-
+import { PublicLayout } from './public-layout/public-layout';
+import { Dashboard } from './dashboard/dashboard';
 
 export const routes: Routes = [
-    {path:'navbar',component:Navbars},
-    {path:'accueil',component:Accueil},
-    {path:'notre-mission',component:NotreMission},
-    {path:'environment', component: Environnement}
 
+  // 🟦 Page d'accueil = layout public
+  { path: '', component: PublicLayout },
+
+  // 🟧 Dashboard robot = page séparée
+  { path: 'dashboard', component: Dashboard },
+
+  // 🔄 Redirection si URL inconnue
+  { path: '**', redirectTo: '' }
 ];
