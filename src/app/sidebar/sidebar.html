@@ -1,17 +1,32 @@
-<div class="w-20  h-screen bg-blue-950 bg-opacity-40 backdrop-blur-lg flex flex-col items-center py-6 space-y-8">
+<div class="w-20 h-screen bg-blue-900 bg-opacity-40 backdrop-blur-xl 
+            flex flex-col justify-between items-center py-6">
 
-  <img src="assets/images/logo.jpg" class="w-10 opacity-90" />
+  <!-- TOP SECTION (logo + icônes) -->
+  <div class="flex flex-col items-center space-y-20">
 
-  <button class="text-gray-300 hover:text-white">
-    <i class="fas fa-robot text-2xl"></i>
-  </button>
+    <!-- Logo -->
+    <img src="assets/images/logo.jpg" class="w-12 opacity-90" />
 
-  <button class="text-gray-300 hover:text-white">
-    <i class="fas fa-history text-2xl"></i>
-  </button>
+    <!-- Icônes -->
+    <button class="text-gray-300 hover:text-white text-3xl">
+      <i class="fas fa-robot"></i>
+    </button>
 
-  <button class="text-gray-300 hover:text-white">
-    <i class="fas fa-user text-2xl"></i>
-  </button>
+    <button class="text-gray-300 hover:text-white text-3xl">
+      <i class="fas fa-history"></i>
+    </button>
+
+    <button class="text-gray-300 hover:text-white text-3xl">
+      <i class="fas fa-user"></i>
+    </button>
+
+  </div>
+
+  <!-- BOTTOM SECTION (Logout) -->
+  <div class="pb-4">
+    <button class="text-red-400 hover:text-red-200 text-2xl">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
 
 </div>

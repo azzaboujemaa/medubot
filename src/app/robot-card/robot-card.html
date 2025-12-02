@@ -1,19 +1,64 @@
-<div class="bg-blue-900  bg-opacity-40 rounded-xl p-6 backdrop-blur-lg">
-  
-  <img src="assets/images/medubot.png" class="w-32 mx-auto mb-4" />
 
-  <div class="text-center text-xl font-semibold">Jellyfish/day</div>
 
-  <div class="mt-2 flex items-center justify-center space-x-2 text-gray-300">
-    <i class="fas fa-weight-hanging"></i>
-    <span>28 kg collected</span>
-  </div>
+  <div class=" h-full flex flex-col flex-1 bg-blue-900 bg-opacity-40 rounded-xl p-8 backdrop-blur-lg flex flex-col items-center justify-start space-y-6">
 
-  <div class="mt-6 text-center">
-    <div class="text-lg font-semibold">30° collected</div>
-    <div class="w-24 h-24 mx-auto border-4 border-blue-300 rounded-full flex items-center justify-center">
-      30
+    <!-- Robot Image (plus grande) -->
+    <img src="assets/images/medubot.png" class="w-40 mx-auto" />
+
+    <!-- Robot ID -->
+    <p class="text-center text-xl font-semibold opacity-90">
+      MB-201
+    </p>
+
+    <!-- Title -->
+    <div class="text-center text-2xl font-bold">
+      Jellyfish/day
     </div>
+
+    <!-- Collected weight -->
+    <div class="flex items-center justify-center space-x-2 text-gray-300 text-lg">
+      <i class="fas fa-weight-hanging"></i>
+      <span>28 kg collected</span>
+    </div>
+
+    <!-- NEW SEMI-CIRCLE PROGRESS -->
+    <div class="mt-4 text-center">
+
+      <div class="text-xl font-semibold mb-4">30° collected</div>
+
+      <div class="relative w-40 h-24 mx-auto">
+
+        <!-- Arc background -->
+        <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 100 50">
+          <path
+            d="M10 50 A40 40 0 0 1 90 50"
+            stroke="#9DBDEB"
+            stroke-width="10"
+            fill="none"
+            stroke-linecap="round"
+          />
+        </svg>
+
+        <!-- Arc progress (blue) -->
+        <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 100 50">
+          <path
+            d="M10 50 A40 40 0 0 1 90 50"
+            stroke="#4BA3FF"
+            stroke-width="10"
+            fill="none"
+            stroke-linecap="round"
+            stroke-dasharray="126"
+            stroke-dashoffset="calc(126 - (126 * 30 / 100))"
+          />
+        </svg>
+
+        <!-- Text -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center pt-3">
+          <span class="text-3xl font-bold">30</span>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-</div>

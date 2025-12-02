@@ -3,30 +3,34 @@
   <!-- Sidebar -->
   <app-sidebar></app-sidebar>
 
-  <!-- Content -->
-  <div class="flex-1 p-6 grid grid-cols-12 gap-6 auto-rows-max">
+  <!-- GRID PRINCIPALE -->
+  <div class="grid grid-cols-12 gap-6 flex-1 p-6 grid-rows-[1fr_1fr]">
 
-    <!-- Robot Card -->
-    <div class="col-span-3">
-      <app-robot-card></app-robot-card>
+    <!-- ROBOT : colonne 1 sur 2 lignes -->
+    <div class="col-span-3 row-span-2 h-full">
+      <app-robot-card class="h-full block"></app-robot-card>
     </div>
 
-    <!-- Sensors Panel (Temp eau & Turbidité) -->
-    <div class="col-span-6 grid grid-cols-2 gap-4">
-      <app-sensors-panel></app-sensors-panel>
+    <!-- SENSORS (Temp + Turbidity) -->
+    <div class="col-span-5 h-full">
+      <app-sensors-panel class="h-full block"></app-sensors-panel>
     </div>
 
-    <!-- Weather placeholder removed -->
-    <!-- Camera -->
-    <div class="col-span-3">
-      <app-camera-panel></app-camera-panel>
+    <!-- WEATHER (pleine hauteur = même que Sensors + Camera) -->
+    <div class="col-span-4 row-span-2 h-full">
+      <app-weather-panel class="h-full block"></app-weather-panel>
     </div>
 
-    <!-- Live Location -->
-    <div class="col-span-12 mt-4">
-      <app-map-panel></app-map-panel>
+    <!-- CAMERA -->
+    <div class="col-span-5 h-full">
+      <app-camera-panel class="h-full block"></app-camera-panel>
+    </div>
+
+    <!-- GPS -->
+    <div class="col-span-4 h-full">
+      <app-map-panel class="h-full block"></app-map-panel>
     </div>
 
   </div>
-</div>
 
+</div>
