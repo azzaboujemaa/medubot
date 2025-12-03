@@ -3,32 +3,32 @@
   <!-- Sidebar -->
   <app-sidebar></app-sidebar>
 
-  <!-- GRID PRINCIPALE -->
-  <div class="grid grid-cols-12 gap-6 flex-1 p-6 grid-rows-[1fr_1fr]">
+  <!-- GRID -->
+  <div class="grid grid-cols-12 gap-6 flex-1 p-6 auto-rows-fr">
 
-    <!-- ROBOT : colonne 1 sur 2 lignes -->
+    <!-- ROBOT (2 lignes) -->
     <div class="col-span-3 row-span-2 h-full">
       <app-robot-card class="h-full block"></app-robot-card>
     </div>
 
-    <!-- SENSORS (Temp + Turbidity) -->
+    <!-- SENSORS (1 ligne, hauteur = Weather) -->
     <div class="col-span-5 h-full">
       <app-sensors-panel class="h-full block"></app-sensors-panel>
     </div>
 
-    <!-- WEATHER (pleine hauteur = même que Sensors + Camera) -->
-    <div class="col-span-4 row-span-2 h-full">
+    <!-- WEATHER (1 ligne = même hauteur que Sensors) -->
+    <div class="col-span-4 h-full">
       <app-weather-panel class="h-full block"></app-weather-panel>
     </div>
 
-    <!-- CAMERA -->
+    <!-- CAMERA (2e ligne) -->
     <div class="col-span-5 h-full">
       <app-camera-panel class="h-full block"></app-camera-panel>
     </div>
 
-    <!-- GPS -->
-    <div class="col-span-4 h-full">
-      <app-map-panel class="h-full block"></app-map-panel>
+    <!-- GPS à côté de Camera (2e ligne) -->
+    <div class="col-span-4 h-auto ">
+      <app-map-panel class=" block"></app-map-panel>
     </div>
 
   </div>

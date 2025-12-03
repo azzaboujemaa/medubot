@@ -1,9 +1,17 @@
-<div class="h-full flex flex-col bg-blue-900 bg-opacity-40 p-6 rounded-xl backdrop-blur-lg">
+<div class="bg-blue-900 bg-opacity-40 p-6 rounded-xl backdrop-blur-lg flex flex-col">
 
-  <h2 class="text-xl font-semibold">Live Location</h2>
+  <h2 class="text-xl font-semibold mb-4">Live Location</h2>
 
-  <div class="flex-1 mt-4 bg-blue-800 rounded-xl flex items-center justify-center">
-    <i class="fas fa-map-marker-alt text-4xl text-blue-300"></i>
+  <!-- Carte -->
+  <div id="map" class="rounded-xl overflow-hidden w-full h-[185px] mb-4"></div>
+
+  <!-- Bouton centré -->
+  <div class="flex justify-center">
+    <button 
+      routerLink="/full-map"
+      class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-semibold">
+      Open Full Map
+    </button>
   </div>
 
 </div>

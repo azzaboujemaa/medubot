@@ -2,15 +2,19 @@ import { Routes } from '@angular/router';
 
 import { PublicLayout } from './public-layout/public-layout';
 import { Dashboard } from './dashboard/dashboard';
+import { FullMapComponent} from './full-map/full-map';
 
 export const routes: Routes = [
 
-  // 🟦 Page d'accueil = layout public
-  { path: '', component: PublicLayout },
+  // 🗺️ Full map
+  { path: 'full-map', component: FullMapComponent },
 
-  // 🟧 Dashboard robot = page séparée
+  // 🟧 Dashboard robot
   { path: 'dashboard', component: Dashboard },
 
-  // 🔄 Redirection si URL inconnue
+  // 🏠 Page d'accueil
+  { path: '', component: PublicLayout },
+
+  // ❗ wildcards en dernier
   { path: '**', redirectTo: '' }
 ];
