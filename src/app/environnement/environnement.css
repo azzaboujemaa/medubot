@@ -64,6 +64,9 @@
 
 .environment-video {
   margin-top: 50px;
+  display: flex;
+  justify-content: center;  /* centre horizontalement */
+  align-items: center;      /* centre verticalement si nécessaire */
 }
 
 .environment-card img {

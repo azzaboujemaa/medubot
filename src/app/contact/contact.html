@@ -1,0 +1,33 @@
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-header">
+      <h2>Contactez l’équipe MeduBot</h2>
+      <p>Nous sommes là pour répondre à vos questions ou collaborations.</p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Formulaire -->
+      <form class="contact-form" (ngSubmit)="sendMessage()">
+        <label>Nom</label>
+        <input type="text" [(ngModel)]="name" name="name" required />
+
+        <label>Adresse e-mail</label>
+        <input type="email" [(ngModel)]="email" name="email" required />
+
+        <label>Message</label>
+        <textarea [(ngModel)]="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="btn-submit">Envoyer</button>
+      </form>
+
+      <!-- Liens réseaux sociaux -->
+      <div class="contact-links">
+        <h3>Suivez-nous</h3>
+        <a href="https://www.medubot.com" target="_blank">🌐 Site officiel</a>
+        <a href="https://facebook.com" target="_blank">📘 Facebook</a>
+        <a href="https://instagram.com" target="_blank">📸 Instagram</a>
+        <a href="https://linkedin.com" target="_blank">💼 LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>

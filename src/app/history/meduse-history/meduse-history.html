@@ -1,0 +1,17 @@
+<div class="bg-blue-900 bg-opacity-40 backdrop-blur-lg p-6 rounded-xl text-white">
+  <h2 class="text-2xl font-bold mb-4">Historique des Méduses</h2>
+
+  <div *ngFor="let m of meduses" class="flex items-center gap-4 p-3 bg-blue-800 bg-opacity-30 rounded-lg mb-3">
+    
+    <img 
+      [src]="m.image" 
+      class="w-16 h-16 rounded-lg object-cover border border-blue-400"
+    />
+
+    <div class="flex flex-col">
+      <span class="font-bold text-lg">{{ m.confidence }}%</span>
+      <span class="text-sm text-blue-300">{{ m.time }}</span>
+    </div>
+
+  </div>
+</div>

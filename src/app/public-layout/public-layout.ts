@@ -3,6 +3,9 @@ import { Navbars } from '../navbar/navbar';
 import { Accueil } from '../accueil/accueil';
 import { NotreMission } from '../notre-mission/notre-mission';
 import { Environnement } from '../environnement/environnement';
+import { Static } from '../static/static';
+import { Contact } from '../contact/contact';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-public-layout',
@@ -13,7 +16,10 @@ import { Environnement } from '../environnement/environnement';
     Navbars,
     Accueil,
     NotreMission,
-    Environnement
+    Environnement,
+    Static,
+    Contact,
+    Footer
   ]
 })
 export class PublicLayout {}

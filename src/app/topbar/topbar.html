@@ -1,0 +1,49 @@
+<div class="relative w-full h-16 flex items-center justify-end px-6
+     bg-gradient-to-r from-blue-800/40 to-blue-600/40 
+     backdrop-blur-xl shadow-md rounded-xl mb-4">
+
+  <!-- Notifications -->
+  <button class="relative mr-6">
+    <i class="fas fa-bell text-2xl text-gray-200 hover:text-white"></i>
+    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+  </button>
+
+  <!-- User section -->
+  <div class="relative">
+
+    <div class="flex items-center space-x-3 cursor-pointer"
+         (click)="toggleDropdown()">
+
+      <!-- Photo user -->
+      <div class="w-10 h-10 rounded-full overflow-hidden border border-white/30">
+        <img src="assets/images/user.jpg" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Nom user -->
+      <span class="font-medium text-white text-lg">
+        Safa Chabchoub
+      </span>
+
+      <!-- petite flèche -->
+      <i class="fas fa-chevron-down text-white"></i>
+    </div>
+
+    <!-- 🔽 Dropdown Menu -->
+    <div *ngIf="dropdownOpen"
+         class="absolute right-0 mt-3 w-40 bg-white text-gray-700 rounded-lg shadow-xl py-2 z-10 dropdown">
+
+      <button class="w-full text-left px-4 py-2 hover:bg-gray-100"
+              (click)="goProfile()">
+        <i class="fas fa-user mr-2"></i> Profil
+      </button>
+
+      <button class="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+              (click)="logout()">
+        <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

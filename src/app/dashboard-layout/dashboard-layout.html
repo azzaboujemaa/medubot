@@ -1,0 +1,17 @@
+<div class="flex h-screen bg-gradient-to-br from-blue-900 to-blue-700 text-white">
+
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Zone centrale -->
+  <div class="flex-1 p-6 overflow-auto">
+
+    <!-- 🔥 On ajoute la TOPBAR ici -->
+    <app-topbar></app-topbar>
+
+    <!-- Le contenu des pages robot / history / profile -->
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>

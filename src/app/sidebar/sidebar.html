@@ -1,32 +1,38 @@
-<div class="w-20 h-screen bg-blue-900 bg-opacity-40 backdrop-blur-xl 
-            flex flex-col justify-between items-center py-6">
+<div 
+  class="h-screen bg-blue-900 bg-opacity-40 backdrop-blur-xl flex flex-col justify-between transition-all duration-300"
+  [class.w-20]="!isOpen"
+  [class.w-64]="isOpen"
+  (mouseenter)="openSidebar()"
+  (mouseleave)="closeSidebar()">
 
-  <!-- TOP SECTION (logo + icônes) -->
-  <div class="flex flex-col items-center space-y-20">
+  <!-- TOP -->
+  <div class="flex flex-col items-center mt-6 space-y-10">
 
-    <!-- Logo -->
     <img src="assets/images/logo.jpg" class="w-12 opacity-90" />
 
-    <!-- Icônes -->
-    <button class="text-gray-300 hover:text-white text-3xl">
+    <div class="sidebar-item" (click)="goDashboard()">
       <i class="fas fa-robot"></i>
-    </button>
+      <span *ngIf="isOpen">Robot</span>
+    </div>
 
-    <button class="text-gray-300 hover:text-white text-3xl">
+    <div class="sidebar-item" (click)="goHistory()">
       <i class="fas fa-history"></i>
-    </button>
+      <span *ngIf="isOpen">Historique</span>
+    </div>
 
-    <button class="text-gray-300 hover:text-white text-3xl">
+    <div class="sidebar-item" (click)="goProfile()">
       <i class="fas fa-user"></i>
-    </button>
+      <span *ngIf="isOpen">Profil</span>
+    </div>
 
   </div>
 
-  <!-- BOTTOM SECTION (Logout) -->
-  <div class="pb-4">
-    <button class="text-red-400 hover:text-red-200 text-2xl">
+  <!-- BOTTOM -->
+  <div class="mb-6 flex justify-center">
+    <div class="sidebar-item text-red-300 hover:text-red-100">
       <i class="fas fa-sign-out-alt"></i>
-    </button>
+      <span *ngIf="isOpen">Logout</span>
+    </div>
   </div>
 
 </div>

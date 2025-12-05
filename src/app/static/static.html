@@ -1,0 +1,36 @@
+<section id="stats" class="stats-section">
+  <div class="container">
+    <div class="stats-header">
+      <h2>Statistiques</h2>
+      <p class="stats-intro">
+        Découvrez les résultats et l’impact de MeduBot sur l’écosystème marin.
+      </p>
+    </div>
+
+    <div class="stats-cards">
+      <div class="stats-card">
+        <div class="icon">🪼</div>
+        <div class="number" [innerText]="jellyfishCount">0</div>
+        <div class="label">Méduses aspirées</div>
+      </div>
+
+      <div class="stats-card">
+        <div class="icon">🐢</div>
+        <div class="number" [innerText]="turtlesProtected">0</div>
+        <div class="label">Tortues protégées</div>
+      </div>
+
+      <div class="stats-card">
+        <div class="icon">🏖️</div>
+        <div class="number" [innerText]="zonesCleaned">0</div>
+        <div class="label">Zones nettoyées</div>
+      </div>
+
+      <div class="stats-card">
+        <div class="icon">🌱</div>
+        <div class="number" [innerText]="fertilizerProduced">0</div>
+        <div class="label">Engrais produits (kg)</div>
+      </div>
+    </div>
+  </div>
+</section>

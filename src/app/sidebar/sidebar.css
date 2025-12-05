@@ -1,0 +1,15 @@
+.sidebar-item {
+  @apply flex items-center space-x-4 text-gray-300 hover:text-white cursor-pointer text-2xl transition-all duration-300;
+}
+
+.sidebar-item i {
+  @apply text-3xl;
+}
+
+.sidebar-item span {
+  @apply text-lg font-medium;
+}
+
+.sidebar-item:hover {
+  transform: translateX(4px);
+}
