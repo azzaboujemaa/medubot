@@ -1,33 +1,46 @@
 <section id="contact" class="contact-section">
-  <div class="container">
-    <div class="contact-header">
-      <h2>Contactez l’équipe MeduBot</h2>
-      <p>Nous sommes là pour répondre à vos questions ou collaborations.</p>
-    </div>
 
-    <div class="contact-content">
-      <!-- Formulaire -->
-      <form class="contact-form" (ngSubmit)="sendMessage()">
-        <label>Nom</label>
-        <input type="text" [(ngModel)]="name" name="name" required />
+  <h2 class="contact-title">Contactez-nous</h2>
 
-        <label>Adresse e-mail</label>
-        <input type="email" [(ngModel)]="email" name="email" required />
+  <div class="contact-container">
 
-        <label>Message</label>
-        <textarea [(ngModel)]="message" name="message" rows="5" required></textarea>
+      <!-- RIGHT CARD — FORM -->
+    <form class="contact-form">
+      <input type="text" placeholder="Votre nom" required>
+      <input type="email" placeholder="Votre email" required>
+      <textarea placeholder="Votre message" required></textarea>
 
-        <button type="submit" class="btn-submit">Envoyer</button>
-      </form>
+      <button type="submit">
+        Envoyer
+      </button>
+    </form>
+    
+    <!-- LEFT CARD — INFO -->
+    <div class="contact-info-card">
+      <h3>Get In Touch</h3>
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Rue de la Mer, Sousse — Tunisie</span>
+      </div>
 
-      <!-- Liens réseaux sociaux -->
-      <div class="contact-links">
-        <h3>Suivez-nous</h3>
-        <a href="https://www.medubot.com" target="_blank">🌐 Site officiel</a>
-        <a href="https://facebook.com" target="_blank">📘 Facebook</a>
-        <a href="https://instagram.com" target="_blank">📸 Instagram</a>
-        <a href="https://linkedin.com" target="_blank">💼 LinkedIn</a>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <span>medubot@support.com</span>
+      </div>
+
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <span>+216 22 345 678</span>
+      </div>
+
+      <div class="info-item">
+        <i class="fab fa-instagram"></i>
+        <span>@medubot_official</span>
       </div>
     </div>
+
+  
+
   </div>
+
 </section>
