@@ -9,6 +9,7 @@ import { Database, ref, onValue, get } from '@angular/fire/database';
 export class SensorsPanelComponent implements OnInit {
 
   temperature: number = 0;
+  turbidityStatus: string = "Chargement...";
 
   constructor(
     private db: Database,
@@ -17,7 +18,8 @@ export class SensorsPanelComponent implements OnInit {
 
   ngOnInit() {
     this.testFirebase();       // test direct
-    this.loadTemperature();    // écoute temps réel
+    this.loadTemperature();    // température en temps réel
+    this.loadTurbidity();      // 🔥 turbidité en temps réel
   }
 
   // 🔥 Test direct Firebase (pour debug)
@@ -33,7 +35,7 @@ export class SensorsPanelComponent implements OnInit {
       });
   }
 
-  // 🔥 Lecture en temps réel
+  // 🔥 Température
   loadTemperature() {
     const tempRef = ref(this.db, 'temperature/value');
 
@@ -49,4 +51,20 @@ export class SensorsPanelComponent implements OnInit {
       }
     });
   }
+
+  // 🔥 Turbidity : lecture du statut (ex: "Eau claire")
+  loadTurbidity() {
+    const turbRef = ref(this.db, 'turbidity/status');
+
+    onValue(turbRef, (snapshot) => {
+      const value = snapshot.val();
+
+      console.log("🌊 Turbidité =", value);
+
+      this.zone.run(() => {
+        this.turbidityStatus = value ?? "Inconnu";
+      });
+    });
+  }
+
 }
