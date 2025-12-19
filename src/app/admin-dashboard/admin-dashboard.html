@@ -1,0 +1,43 @@
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>
+      Tableau de Bord <span>MeduBot</span>
+    </h1>
+    <p>Supervision en temps réel des robots marins MeduBot</p>
+  </header>
+
+  <!-- ROBOT CARDS -->
+  <section class="robot-cards">
+    <div class="robot-card" *ngFor="let bot of medubots">
+
+      <div class="robot-header">
+        <div class="robot-icon">🤖</div>
+        <span class="status" [ngClass]="getStatusClass(bot.status)">
+          {{ getStatusLabel(bot.status) }}
+        </span>
+      </div>
+
+      <h3>MeduBot {{ bot.id }}</h3>
+      <p class="zone">📍 {{ bot.zone }}</p>
+
+      <div class="robot-stats">
+        <div>
+          <span>Batterie</span>
+          <strong>{{ bot.battery }}%</strong>
+        </div>
+        <div>
+          <span>Méduses</span>
+          <strong>{{ bot.jellyfish }}</strong>
+        </div>
+        <div>
+          <span>Score Éco</span>
+          <strong class="eco">{{ bot.ecoScore }}</strong>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>

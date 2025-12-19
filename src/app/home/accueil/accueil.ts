@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Modal } from '../services/modal';
+import { Modal } from '../../services/modal';
 
 @Component({
   selector: 'app-accueil',

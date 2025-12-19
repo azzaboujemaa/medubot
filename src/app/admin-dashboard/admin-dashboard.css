@@ -1,0 +1,107 @@
+.robot-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+/* ROBOT CARD */
+.robot-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 22px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+/* HEADER */
+.robot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.robot-icon {
+  font-size: 28px;
+}
+
+.status {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* STATUS COLORS */
+.status.mission {
+  background: rgba(77, 255, 180, 0.15);
+  color: #4dffb2;
+}
+
+.status.idle {
+  background: rgba(77, 163, 255, 0.15);
+  color: #4da3ff;
+}
+
+.status.alert {
+  background: rgba(255, 80, 80, 0.15);
+  color: #ff6b6b;
+}
+
+.status.offline {
+  background: rgba(255, 255, 255, 0.1);
+  color: #9aa4c7;
+}
+
+/* CONTENT */
+.robot-card h3 {
+  margin: 14px 0 4px;
+}
+
+.zone {
+  font-size: 13px;
+  color: #9aa4c7;
+}
+
+/* STATS */
+.robot-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.robot-stats div {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
+.robot-stats span {
+  display: block;
+  font-size: 12px;
+  color: #9aa4c7;
+}
+
+.robot-stats strong {
+  font-size: 16px;
+}
+
+.robot-stats .eco {
+  color: #4dffb2;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .robot-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .robot-cards {
+    grid-template-columns: 1fr;
+  }
+}

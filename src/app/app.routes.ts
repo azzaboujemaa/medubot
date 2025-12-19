@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { PublicLayout } from './public-layout/public-layout';
+import { PublicLayout } from './layout/public-layout/public-layout'
 import { Dashboard } from './dashboard/dashboard';
 import { History } from './history/history';
 import { Profile } from './profile/profile';
 import { FullMapComponent } from './full-map/full-map';
-import { DashboardLayout } from './dashboard-layout/dashboard-layout';
+import { DashboardLayout } from './layout/public-layout/dashboard-layout/dashboard-layout';
+import { AdminDashboard} from './admin-dashboard/admin-dashboard';
+import { AdminLayoutComponent } from './admin-layout/admin-layout';
 
 export const routes: Routes = [
 
@@ -17,7 +19,15 @@ export const routes: Routes = [
       { path: 'dashboard', component: Dashboard },
       { path: 'history', component: History },
        { path: 'profile', component: Profile },
-      { path: 'full-map', component: FullMapComponent },
+      {path: 'admin-dashboard', component: AdminDashboard },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+     
+    ]
+  },
+   {path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      { path: 'dashboard', component: AdminDashboard },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
@@ -27,4 +37,6 @@ export const routes: Routes = [
 
   // Wildcard
   { path: '**', redirectTo: 'home' }
+
+  
 ];
