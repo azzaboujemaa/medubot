@@ -1,34 +1,63 @@
-<nav class="sidebar">
+<div
+  class="h-screen bg-blue-900 flex flex-col justify-between transition-all duration-300"
+  [class.w-20]="!isOpen"
+  [class.w-64]="isOpen"
+  (mouseenter)="openSidebar()"
+  (mouseleave)="closeSidebar()"
+>
 
-  <!-- SUPERVISION -->
-  <div class="section">
-    <p class="title">SUPERVISION</p>
-    <a routerLink="/admin/dashboard">🧭 Dashboard</a>
-    <a routerLink="/admin/robots">🤖 Robots MeduBot</a>
-    <a routerLink="/admin/map">🗺️ Carte globale</a>
-    <a routerLink="/admin/alerts">🚨 Alertes & Incidents</a>
+  <!-- TOP -->
+  <div class="flex flex-col items-center mt-6 space-y-10">
+
+    <!-- LOGO -->
+    <img src="assets/images/logo.jpg" class="w-12 opacity-90" />
+
+    <!-- SUPERVISION -->
+    <div class="sidebar-item" (click)="goAdminDashboard()">
+      <i class="fas fa-gauge"></i>
+      <span *ngIf="isOpen">Vue globale</span>
+    </div>
+
+    <div class="sidebar-item" (click)="goRobots()">
+      <i class="fas fa-robot"></i>
+      <span *ngIf="isOpen">Flotte MeduBot</span>
+    </div>
+
+    <div class="sidebar-item" (click)="goMap()">
+      <i class="fas fa-map-location-dot"></i>
+      <span *ngIf="isOpen">Carte de supervision</span>
+    </div>
+
+    <!-- GESTION -->
+    <div class="sidebar-item" (click)="goEmployees()">
+      <i class="fas fa-users"></i>
+      <span *ngIf="isOpen">Employés</span>
+    </div>
+
+    <div class="sidebar-item" (click)="goCreateEmployee()">
+      <i class="fas fa-user-plus"></i>
+      <span *ngIf="isOpen">Créer un employé</span>
+    </div>
+
+    <!-- ANALYSE -->
+    <div class="sidebar-item" (click)="goPartners()">
+      <i class="fas fa-handshake"></i>
+      <span *ngIf="isOpen">Partenaires</span>
+    </div>
+
+    <div class="sidebar-item" (click)="goJellyfishAnalytics()">
+      <i class="fas fa-chart-pie"></i>
+      <span *ngIf="isOpen">Valorisation des méduses</span>
+    </div>
+
   </div>
 
-  <!-- GESTION -->
-  <div class="section">
-    <p class="title">GESTION</p>
-    <a routerLink="/admin/employees">👤 Employés</a>
-    <a routerLink="/admin/employees/create" class="sub">➕ Créer compte</a>
-    <a routerLink="/admin/roles">🔑 Rôles & permissions</a>
-    <a routerLink="/admin/operators">🧑‍✈️ Opérateurs</a>
-    <a routerLink="/admin/maintenance">🧑‍🔧 Maintenance</a>
+  <!-- BOTTOM -->
+  <div class="mb-6 flex justify-center">
+    <div class="sidebar-item text-red-300 hover:text-red-100" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span *ngIf="isOpen">Logout</span>
+    </div>
   </div>
 
-  <!-- ANALYSE -->
-  <div class="section">
-    <p class="title">ANALYSE</p>
-    <a routerLink="/admin/stats">📊 Statistiques</a>
-    <a routerLink="/admin/eco-impact">🌱 Impact écologique</a>
-    <a routerLink="/admin/reports">📈 Rapports & exports</a>
-  </div>
-
-  <div class="bottom">
-    <a routerLink="/logout">🚪 Logout</a>
-  </div>
-
-</nav>
+</div>

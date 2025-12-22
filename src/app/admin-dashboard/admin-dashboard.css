@@ -1,21 +1,70 @@
+/* =========================
+   DASHBOARD CONTAINER
+========================= */
+.dashboard {
+  padding: 32px 36px;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  margin-bottom: 36px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #f1f5ff;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.header h1 span {
+  color: #ffd84d;  
+  font-weight: 700;
+}
+
+.header p {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(230, 236, 255, 0.75);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+/* =========================
+   ROBOT CARDS GRID (3 / ligne)
+========================= */
 .robot-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   margin-bottom: 30px;
 }
 
-/* ROBOT CARD */
+/* =========================
+   ROBOT CARD
+========================= */
 .robot-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 22px;
+  border-radius: 20px;
+  padding: 24px;
   backdrop-filter: blur(14px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* HEADER */
+.robot-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
+   ROBOT HEADER
+========================= */
 .robot-header {
   display: flex;
   justify-content: space-between;
@@ -26,14 +75,17 @@
   font-size: 28px;
 }
 
+/* =========================
+   STATUS BADGES
+========================= */
 .status {
   font-size: 12px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-/* STATUS COLORS */
 .status.mission {
   background: rgba(77, 255, 180, 0.15);
   color: #4dffb2;
@@ -45,7 +97,7 @@
 }
 
 .status.alert {
-  background: rgba(255, 80, 80, 0.15);
+  background: rgba(255, 80, 80, 0.18);
   color: #ff6b6b;
 }
 
@@ -54,54 +106,74 @@
   color: #9aa4c7;
 }
 
-/* CONTENT */
+/* =========================
+   ROBOT CONTENT
+========================= */
 .robot-card h3 {
-  margin: 14px 0 4px;
+  margin: 16px 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .zone {
   font-size: 13px;
-  color: #9aa4c7;
+  color: rgba(230, 236, 255, 0.65);
+  margin-bottom: 14px;
 }
 
-/* STATS */
+/* =========================
+   ROBOT STATS
+========================= */
 .robot-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 16px;
+  gap: 12px;
 }
 
 .robot-stats div {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
-  padding: 10px;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 14px;
+  padding: 12px 8px;
   text-align: center;
 }
 
 .robot-stats span {
   display: block;
   font-size: 12px;
-  color: #9aa4c7;
+  color: rgba(230, 236, 255, 0.65);
+  margin-bottom: 4px;
 }
 
 .robot-stats strong {
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .robot-stats .eco {
   color: #4dffb2;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1100px) {
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1200px) {
   .robot-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .robot-cards {
     grid-template-columns: 1fr;
+  }
+
+  .dashboard {
+    padding: 24px 20px;
+  }
+
+  .header h1 {
+    font-size: 24px;
   }
 }
