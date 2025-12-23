@@ -1,0 +1,49 @@
+<div class="modal-backdrop" (click)="close()"></div>
+
+<div class="modal-container">
+
+  <div class="modal-header">
+    <h2>Créer un compte employé</h2>
+    <button class="close-btn" (click)="close()">✕</button>
+  </div>
+
+  <form (ngSubmit)="submit()" class="modal-body">
+
+    <label>Nom complet</label>
+    <input type="text"
+           [(ngModel)]="employee.name"
+           name="name"
+           required />
+
+    <label>Email</label>
+    <input type="email"
+           [(ngModel)]="employee.email"
+           name="email"
+           required />
+
+    <label>Rôle</label>
+    <select [(ngModel)]="employee.role" name="role">
+      <option value="ADMIN">Admin</option>
+      <option value="EMPLOYEE">Employé</option>
+      <option value="OPERATOR">Opérateur</option>
+      <option value="MAINTENANCE">Maintenance</option>
+    </select>
+
+    <label>Mot de passe</label>
+    <input type="password"
+           [(ngModel)]="employee.password"
+           name="password"
+           required />
+
+    <div class="modal-actions">
+      <button type="button" class="btn-cancel" (click)="close()">
+        Annuler
+      </button>
+      <button type="submit" class="btn-save">
+        Créer
+      </button>
+    </div>
+
+  </form>
+
+</div>

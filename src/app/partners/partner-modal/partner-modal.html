@@ -1,0 +1,50 @@
+<div class="modal-backdrop" (click)="close()"></div>
+
+<div class="modal-container">
+
+  <div class="modal-header">
+    <h2>Ajouter un partenaire</h2>
+    <button class="close-btn" (click)="close()">✕</button>
+  </div>
+
+  <form (ngSubmit)="submit()" class="modal-body">
+
+    <label>Nom de la société</label>
+    <input type="text" [(ngModel)]="partner.name" name="name" required>
+
+    <label>Type de partenaire</label>
+    <select [(ngModel)]="partner.type" name="type">
+      <option value="HOTEL">Hôtel – Nettoyage</option>
+      <option value="COSMETIC">Cosmétique</option>
+      <option value="FERTILIZER">Engrais organique</option>
+    </select>
+
+    <label>Téléphone</label>
+    <input type="text" [(ngModel)]="partner.phone" name="phone">
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="partner.email" name="email">
+
+    <label>Date début collaboration</label>
+    <input type="date" [(ngModel)]="partner.startDate" name="startDate">
+
+    <label>Date fin (si terminée)</label>
+    <input type="date" [(ngModel)]="partner.endDate" name="endDate">
+
+    <label>Quantité</label>
+    <input type="number" [(ngModel)]="partner.quantity" name="quantity">
+
+    <label>Unité</label>
+    <input type="text" [(ngModel)]="partner.unit" placeholder="kg / km nettoyés">
+
+    <label>Montant (DT)</label>
+    <input type="number" [(ngModel)]="partner.amount" name="amount">
+
+    <div class="modal-actions">
+      <button type="button" class="btn-cancel" (click)="close()">Annuler</button>
+      <button type="submit" class="btn-save">Ajouter</button>
+    </div>
+
+  </form>
+
+</div>

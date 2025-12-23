@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Modal } from '../services/modal';
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -13,7 +14,9 @@ export class SidebarAdmin {
 
   isOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private modal:Modal
+  ) {}
 
   openSidebar() {
     this.isOpen = true;
@@ -36,11 +39,12 @@ export class SidebarAdmin {
   }
 
   goEmployees() {
-    this.router.navigate(['/admin/employees']);
-  }
+  this.router.navigate(['/admin/employees']);
+}
+
 
   goCreateEmployee() {
-    this.router.navigate(['/admin/employees/create']);
+    this.modal.openCreateAccount();   // 🔥 ouvre la fenêtre
   }
 
   goPartners() {
@@ -54,4 +58,6 @@ export class SidebarAdmin {
   logout() {
     this.router.navigate(['/logout']);
   }
-}
+   // 🔥 ouvre la modale
+  }
+

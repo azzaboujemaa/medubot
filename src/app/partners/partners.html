@@ -1,0 +1,52 @@
+<div class="partners-page">
+
+  <div class="header">
+    <h2>🤝 Partenaires MeduBot</h2>
+<button class="btn-add" (click)="modal.openPartner()">
+  ➕ Ajouter partenaire
+</button>
+  </div>
+
+  <table class="partners-table">
+    <thead>
+      <tr>
+        <th>Société</th>
+        <th>Type</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Statut</th>
+        <th>Contact</th>
+        <th>Activité</th>
+        <th>Montant</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of partners">
+        <td>{{ p.name }}</td>
+        <td>{{ getTypeLabel(p.type) }}</td>
+        <td>{{ p.startDate }}</td>
+        <td>{{ p.endDate || '—' }}</td>
+        <td>
+          <span class="status"
+                [class.active]="p.status === 'ACTIVE'"
+                [class.finished]="p.status === 'FINISHED'">
+            {{ getStatusLabel(p.status) }}
+          </span>
+        </td>
+        <td>
+          📞 {{ p.phone }} <br>
+          📧 {{ p.email }}
+        </td>
+        <td>{{ p.quantity }} {{ p.unit }}</td>
+        <td>{{ p.amount ? p.amount + ' DT' : '—' }}</td>
+        <td class="actions">
+          <button class="edit" (click)="editPartner(p)">✏️</button>
+          <button class="delete" (click)="deletePartner(p.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -17,4 +17,5 @@ export class Accueil {
   openSignIn() {
     this.modal.openSignIn();
   }
+  
 }

@@ -8,6 +8,9 @@ import { FullMapComponent } from './full-map/full-map';
 import { DashboardLayout } from './layout/public-layout/dashboard-layout/dashboard-layout';
 import { AdminDashboard} from './admin-dashboard/admin-dashboard';
 import { AdminLayoutComponent } from './admin-layout/admin-layout';
+import { CreateAccountModalComponent } from './create-account-modal/create-account-modal';
+import { EmployeesComponent } from './employees/employees';
+import { PartnersComponent } from './partners/partners';
 
 export const routes: Routes = [
 
@@ -28,6 +31,8 @@ export const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: 'dashboard', component: AdminDashboard },
+      { path: 'employees', component: EmployeesComponent },
+      {path:'partners', component: PartnersComponent}, 
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
@@ -36,7 +41,6 @@ export const routes: Routes = [
   { path: 'home', component: PublicLayout },
 
   // Wildcard
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'home' },
 
-  
 ];

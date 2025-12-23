@@ -1,0 +1,89 @@
+.employees-page {
+  padding: 30px;
+  color: #ffffff;
+}
+
+/* HEADER */
+.employees-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.employees-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.btn-add {
+  background: #4dffb2;
+  color: #0b1c3d;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  opacity: 0.9;
+}
+
+/* TABLE */
+.employees-table {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* HEADER ROW */
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 2fr 1.5fr;
+  padding: 14px 18px;
+  align-items: center;
+}
+
+.table-header {
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+  color: #9aa4c7;
+}
+
+/* DATA ROW */
+.table-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.table-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ROLE */
+.role {
+  font-weight: 600;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-edit,
+.btn-delete {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-edit {
+  color: #4da3ff;
+}
+
+.btn-delete {
+  color: #ff6b6b;
+}

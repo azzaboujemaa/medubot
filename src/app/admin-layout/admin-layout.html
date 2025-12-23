@@ -11,3 +11,12 @@
     </div>
   </div>
 </div>
+
+<!-- MODALES -->
+<app-create-account-modal
+  *ngIf="modal.showCreateAccount$ | async">
+</app-create-account-modal>
+
+<app-partner-modal
+  *ngIf="modal.showPartner$ | async">
+</app-partner-modal>

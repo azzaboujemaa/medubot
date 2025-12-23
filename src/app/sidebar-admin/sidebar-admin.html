@@ -13,19 +13,16 @@
     <img src="assets/images/logo.jpg" class="w-12 opacity-90" />
 
     <!-- SUPERVISION -->
-    <div class="sidebar-item" (click)="goAdminDashboard()">
-      <i class="fas fa-gauge"></i>
-      <span *ngIf="isOpen">Vue globale</span>
-    </div>
+    
 
     <div class="sidebar-item" (click)="goRobots()">
       <i class="fas fa-robot"></i>
-      <span *ngIf="isOpen">Flotte MeduBot</span>
+      <span *ngIf="isOpen">Robots</span>
     </div>
 
     <div class="sidebar-item" (click)="goMap()">
       <i class="fas fa-map-location-dot"></i>
-      <span *ngIf="isOpen">Carte de supervision</span>
+      <span *ngIf="isOpen">Carte des robots </span>
     </div>
 
     <!-- GESTION -->
@@ -35,9 +32,11 @@
     </div>
 
     <div class="sidebar-item" (click)="goCreateEmployee()">
-      <i class="fas fa-user-plus"></i>
-      <span *ngIf="isOpen">Créer un employé</span>
-    </div>
+  <i class="fas fa-user-plus"></i>
+  <span *ngIf="isOpen">Créer un compte</span>
+</div>
+
+    
 
     <!-- ANALYSE -->
     <div class="sidebar-item" (click)="goPartners()">
@@ -47,7 +46,7 @@
 
     <div class="sidebar-item" (click)="goJellyfishAnalytics()">
       <i class="fas fa-chart-pie"></i>
-      <span *ngIf="isOpen">Valorisation des méduses</span>
+      <span *ngIf="isOpen">répartition des méduses</span>
     </div>
 
   </div>

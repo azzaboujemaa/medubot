@@ -91,9 +91,9 @@
   color: #4dffb2;
 }
 
-.status.idle {
-  background: rgba(77, 163, 255, 0.15);
-  color: #4da3ff;
+.status.breakdown {
+  background: rgba(0, 0, 0, 0.15);
+  color: #57a8ff;
 }
 
 .status.alert {
