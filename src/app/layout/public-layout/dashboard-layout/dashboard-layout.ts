@@ -3,11 +3,13 @@ import { Sidebar } from '../../../sidebar/sidebar';
 import { RouterOutlet } from "@angular/router";
 import { Topbar } from '../../../topbar/topbar';
 
+
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [Sidebar, RouterOutlet,Topbar],
+  standalone: true, // 🔥 هذا هو الأهم
+  imports: [Sidebar, RouterOutlet, Topbar],
   templateUrl: './dashboard-layout.html',
-  styleUrl: './dashboard-layout.css',
+  styleUrls: ['./dashboard-layout.css'],
 })
 export class DashboardLayout {
 

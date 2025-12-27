@@ -14,21 +14,26 @@
     <div class="table-header">
       <span>Nom</span>
       <span>Email</span>
-      <span>Téléphone</span>
       <span>Rôle</span>
       <span>Actions</span>
     </div>
 
-    <div class="table-row" *ngFor="let emp of employees">
+    <!-- 🔥 Firestore temps réel -->
+    <div class="table-row" *ngFor="let emp of employees$ | async">
       <span>{{ emp.name }}</span>
       <span>{{ emp.email }}</span>
-      <span>{{ emp.phone }}</span>
       <span class="role">{{ getRoleLabel(emp.role) }}</span>
 
       <span class="actions">
-        <button class="btn-edit" (click)="editEmployee(emp)">✏️</button>
-        <button class="btn-delete" (click)="deleteEmployee(emp.id)">🗑️</button>
-      </span>
+  <button class="btn-edit" (click)="editEmployee(emp)">
+    ✏️
+  </button>
+
+  <button class="btn-delete" (click)="deleteEmployee(emp.id)">
+    🗑️
+  </button>
+</span>
+
     </div>
 
   </div>

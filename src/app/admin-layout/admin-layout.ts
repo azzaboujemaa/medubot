@@ -5,24 +5,26 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarAdmin } from '../sidebar-admin/sidebar-admin';
 import { Topbar } from '../topbar/topbar';
 import { Modal } from '../services/modal';
-import { CreateAccountModalComponent } 
+
+import { EmployeeModal }
   from '../create-account-modal/create-account-modal';
-  import { PartnerModalComponent } from '../partners/partner-modal/partner-modal';
+
+import { EditEmployeeModal } from '../edit-employee/edit-employee';
 
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
   imports: [
-    CommonModule,          // indispensable pour *ngIf
+    CommonModule,
     RouterOutlet,
     SidebarAdmin,
     Topbar,
-    CreateAccountModalComponent,
-      PartnerModalComponent
+    EmployeeModal,
+    EditEmployeeModal, // ✅ OBLIGATOIRE
   ],
   templateUrl: './admin-layout.html',
   styleUrls: ['./admin-layout.css']
 })
-export class AdminLayoutComponent {
+export class AdminLayout {
   constructor(public modal: Modal) {}
 }

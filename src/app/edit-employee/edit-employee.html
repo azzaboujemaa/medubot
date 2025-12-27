@@ -1,0 +1,37 @@
+<div class="modal-backdrop">
+  <div class="modal-card">
+
+    <h3>Modifier un employé</h3>
+
+    <!-- Nom -->
+    <label>Nom complet</label>
+    <input
+      type="text"
+      [(ngModel)]="employee.name"
+    />
+
+    <!-- Email (lecture seule) -->
+    <label>Email</label>
+    <input
+      type="email"
+      [value]="employee.email"
+      disabled
+    />
+
+    <!-- Rôle -->
+    <label>Rôle</label>
+    <select [(ngModel)]="employee.role">
+      <option value="EMPLOYEE">Employé</option>
+      <option value="ADMIN">Admin</option>
+      <option value="OPERATOR">Opérateur</option>
+      <option value="MAINTENANCE">Maintenance</option>
+    </select>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn-cancel" (click)="cancel()">Annuler</button>
+      <button class="btn-save" (click)="save()">Enregistrer</button>
+    </div>
+
+  </div>
+</div>

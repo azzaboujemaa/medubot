@@ -1,6 +1,10 @@
+
 <div class="admin-container">
   <!-- SIDEBAR -->
   <app-sidebar-admin></app-sidebar-admin>
+
+
+
 
   <!-- MAIN AREA -->
   <div class="admin-main">
@@ -13,10 +17,16 @@
 </div>
 
 <!-- MODALES -->
-<app-create-account-modal
+<app-employee-modal
   *ngIf="modal.showCreateAccount$ | async">
-</app-create-account-modal>
+</app-employee-modal>
 
-<app-partner-modal
-  *ngIf="modal.showPartner$ | async">
-</app-partner-modal>
+<!-- EDIT EMPLOYEE -->
+<!-- EDIT EMPLOYEE -->
+<app-edit-employee-modal
+  *ngIf="modal.editEmployee$ | async">
+</app-edit-employee-modal>
+
+
+
+

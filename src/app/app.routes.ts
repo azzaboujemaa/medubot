@@ -1,46 +1,41 @@
 import { Routes } from '@angular/router';
-
-import { PublicLayout } from './layout/public-layout/public-layout'
-import { Dashboard } from './dashboard/dashboard';
-import { History } from './history/history';
+import { PublicLayout } from './layout/public-layout/public-layout';
 import { Profile } from './profile/profile';
-import { FullMapComponent } from './full-map/full-map';
+import { FullMap } from './full-map/full-map';
+import { History } from './history/history';
+import { Dashboard } from './dashboard/dashboard';
 import { DashboardLayout } from './layout/public-layout/dashboard-layout/dashboard-layout';
-import { AdminDashboard} from './admin-dashboard/admin-dashboard';
-import { AdminLayoutComponent } from './admin-layout/admin-layout';
-import { CreateAccountModalComponent } from './create-account-modal/create-account-modal';
+
+import { AdminDashboard } from './admin-dashboard/admin-dashboard';
+import { AdminLayout} from './admin-layout/admin-layout';
 import { EmployeesComponent } from './employees/employees';
-import { PartnersComponent } from './partners/partners';
 
 export const routes: Routes = [
 
-  // Toutes les pages "dashboard" partagent le même layout
+  // 🌍 PUBLIC
   {
-    path: '',
-    component: DashboardLayout,
+  path:'',
+  component: DashboardLayout,
     children: [
       { path: 'dashboard', component: Dashboard },
       { path: 'history', component: History },
-       { path: 'profile', component: Profile },
-      {path: 'admin-dashboard', component: AdminDashboard },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-     
-    ]
+      { path: 'profile', component: Profile},
+      { path: 'map', component: FullMap },
+      {path:'', redirectTo: 'dashboard', pathMatch: 'full'},
+    ],
   },
-   {path: 'admin',
-    component: AdminLayoutComponent,
+   {path:'home', component:PublicLayout},
+     {
+    path: 'admin',
+    component: AdminLayout,
     children: [
       { path: 'dashboard', component: AdminDashboard },
-      { path: 'employees', component: EmployeesComponent },
-      {path:'partners', component: PartnersComponent}, 
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+       { path: 'employees', component: EmployeesComponent }
     ]
   },
-
-  // Page d'accueil publique
-  { path: 'home', component: PublicLayout },
-
-  // Wildcard
-  { path: '**', redirectTo: 'home' },
-
+     { path: '**', redirectTo: 'dashboard' },
 ];
+
+
+  
+

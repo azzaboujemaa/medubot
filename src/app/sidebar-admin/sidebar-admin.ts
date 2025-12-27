@@ -15,7 +15,7 @@ export class SidebarAdmin {
   isOpen = false;
 
   constructor(private router: Router,
-    private modal:Modal
+    public modal:Modal 
   ) {}
 
   openSidebar() {

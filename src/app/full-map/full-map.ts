@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './full-map.html',
   styleUrl: './full-map.css',
 })
-export class FullMapComponent implements OnInit {
+export class FullMap implements OnInit {
 
   private map: any;
   private robotMarker: any;

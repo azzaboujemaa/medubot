@@ -8,7 +8,7 @@ import { Modal } from '../../services/modal';
   standalone: true
 })
 export class Accueil {
-  constructor(private modal: Modal) {}
+  constructor(public modal: Modal) {}
 
   openCreateAccount() {
     this.modal.openCreateAccount();  // ouvre la modale du Navbar

@@ -1,13 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Modal } from '../services/modal';
 
+import {
+  Firestore,
+  collection,
+  collectionData,
+  deleteDoc,
+  doc
+} from '@angular/fire/firestore';
+
+import { Observable } from 'rxjs';
+
+/* ✅ Interface propre (en dehors du composant) */
 interface Employee {
-  id: number;
+  id: string;   // 🔥 ID Firestore
   name: string;
   email: string;
-  phone: string;
   role: 'ADMIN' | 'EMPLOYEE' | 'OPERATOR' | 'MAINTENANCE';
+  active: boolean;
+  createdAt?: any;
 }
 
 @Component({
@@ -17,50 +29,36 @@ interface Employee {
   templateUrl: './employees.html',
   styleUrls: ['./employees.css']
 })
-export class EmployeesComponent {
+export class EmployeesComponent implements OnInit {
 
-  constructor(public modal: Modal) {}
+  /* 🔥 Stream Firestore */
+  employees$!: Observable<Employee[]>;
 
-  employees: Employee[] = [
-    {
-      id: 1,
-      name: 'Ahmed Ben Ali',
-      email: 'ahmed@medubot.tn',
-      phone: '55 123 456',
-      role: 'ADMIN'
-    },
-    {
-      id: 2,
-      name: 'Sana Trabelsi',
-      email: 'sana@medubot.tn',
-      phone: '22 987 654',
-      role: 'OPERATOR'
-    },
-    {
-      id: 3,
-      name: 'Youssef Khalifa',
-      email: 'youssef@medubot.tn',
-      phone: '99 456 321',
-      role: 'MAINTENANCE'
-    }
-  ];
+  constructor(
+    public modal: Modal,
+    private firestore: Firestore
+  ) {}
 
-  // ➕ Ajouter
+  /* 🔄 Chargement temps réel */
+  ngOnInit() {
+    const ref = collection(this.firestore, 'employees');
+
+    this.employees$ = collectionData(ref, {
+      idField: 'id'
+    }) as Observable<Employee[]>;
+  }
+
+  /* ➕ Ajouter */
   addEmployee() {
     this.modal.openCreateAccount();
   }
 
-  // ✏️ Modifier
-  editEmployee(emp: Employee) {
-    console.log('Modifier', emp);
-    // plus tard : ouvrir modale édition
+  /* 🗑️ Supprimer (Firestore) */
+  async deleteEmployee(id: string) {
+    await deleteDoc(doc(this.firestore, `employees/${id}`));
   }
 
-  // 🗑️ Supprimer
-  deleteEmployee(id: number) {
-    this.employees = this.employees.filter(e => e.id !== id);
-  }
-
+  /* 🎭 Label rôle */
   getRoleLabel(role: string): string {
     switch (role) {
       case 'ADMIN': return 'Admin';
@@ -69,4 +67,8 @@ export class EmployeesComponent {
       default: return 'Employé';
     }
   }
+  editEmployee(emp: Employee) {
+  this.modal.openEditEmployee(emp);
+}
+
 }
