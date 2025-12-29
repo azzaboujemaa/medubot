@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditEmployeeModal } from './edit-employee';
+import { RobotsMap } from './robots-map';
 
-describe('EditEmployee', () => {
-  let component: EditEmployeeModal;
-  let fixture: ComponentFixture< EditEmployeeModal>;
+describe('RobotsMap', () => {
+  let component: RobotsMap;
+  let fixture: ComponentFixture<RobotsMap>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ EditEmployeeModal]
+      imports: [RobotsMap]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent( EditEmployeeModal);
+    fixture = TestBed.createComponent(RobotsMap);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

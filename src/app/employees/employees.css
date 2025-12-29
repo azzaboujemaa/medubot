@@ -17,7 +17,7 @@
 }
 
 .btn-add {
-  background: #4dffb2;
+  background:  #ffd166;
   color: #0b1c3d;
   border: none;
   padding: 10px 16px;
@@ -41,7 +41,7 @@
 .table-header,
 .table-row {
   display: grid;
-  grid-template-columns: 2fr 3fr 2fr 2fr 1.5fr;
+  grid-template-columns: 2fr 3fr 2fr 2fr 1.5fr 1fr;
   padding: 14px 18px;
   align-items: center;
 }

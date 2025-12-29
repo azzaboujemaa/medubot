@@ -1,75 +1,82 @@
-/* ====== NAVBAR ====== */
+/* =============================== */
+/* ========= NAVBAR ============== */
+/* =============================== */
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color:#b3e5fc ;
+  background-color: #b3e5fc;
   padding: 10px 40px;
   border-bottom: 1px solid #e2e8f0;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* ====== NAVBAR LEFT ====== */
+/* ===== LEFT SIDE ===== */
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 25px;
+  width: 100%;
 }
 
-.logo {
+/* ===== LOGO ===== */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-img {
+  max-height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text {
   font-size: 18px;
   font-weight: 700;
   color: #2d3748;
-  margin-right: 20px;
 }
 
-/* ====== NAVIGATION LINKS ====== */
+/* ===== NAV LINKS ===== */
 .nav-links {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 32px;
+  flex: 1;
 }
 
 .nav-link {
   text-decoration: none;
   color: #4a5568;
   font-weight: 500;
-  transition: color 0.3s ease;
+  padding: 8px 6px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
 .nav-link:hover {
   color: #2563eb;
 }
 
-/* ====== NAVBAR RIGHT ====== */
+/* ===== ACTIVE LINK ===== */
+.nav-link.active-section {
+  font-weight: 700;
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 3px;
+}
+
+/* ===== RIGHT SIDE (OPTIONAL) ===== */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
 }
 
-
-
-.social-icons i {
-  color: #718096;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.social-icons i:hover {
-  color: #2563eb;
-}
-
-/* ====== AUTH BUTTONS ====== */
-.auth-buttons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+/* ===== AUTH BUTTON ===== */
 .btn-signin {
   background-color: transparent;
   border: 2px solid #2563eb;
@@ -85,133 +92,3 @@
   background-color: #2563eb;
   color: white;
 }
-
-/* ====== MODALE ====== */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
-}
-
-.modal-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  padding: 30px 40px;
-  width: 380px;
-  z-index: 11;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -45%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #666;
-}
-
-.close-btn:hover {
-  color: #000;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 15px;
-  color: #1a202c;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-label {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-input {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-input:focus {
-  border-color: #3182ce;
-}
-
-.btn-login {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-login:hover {
-  background-color: #1e40af;
-}
-
-
-
-.error {
-  color: #e53e3e;
-  font-size: 0.85rem;
-  margin-top: -8px;
-  margin-bottom: 8px;
-}
-
-/* ====== LIEN ACTIF ====== */
-.nav-link.active {
-  font-weight: 700;            /* en gras */
-  color: #2563eb;              /* bleu vif */
-  border-bottom: 2px solid #2563eb; /* petite barre bleue sous le texte */
-}
-
-/* Effet fluide au survol */
-.nav-link {
-  position: relative;
-  text-decoration: none;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #2563eb;
-}
-
-.nav-link.active-section {
-  font-weight: 700;
-  color: #2563eb !important;
-  border-bottom: 2px solid #2563eb;
-  padding-bottom: 3px;
-}
-
-

@@ -10,6 +10,8 @@ import { EmployeeModal }
   from '../create-account-modal/create-account-modal';
 
 import { EditEmployeeModal } from '../edit-employee/edit-employee';
+import { PartnerModal } from '../partner/partner-modal/partner-modal';
+import { EditPartnerModal } from '../partner/edit-partner/edit-partner';
 
 @Component({
   selector: 'app-admin-layout',
@@ -20,7 +22,10 @@ import { EditEmployeeModal } from '../edit-employee/edit-employee';
     SidebarAdmin,
     Topbar,
     EmployeeModal,
-    EditEmployeeModal, // ✅ OBLIGATOIRE
+    EditEmployeeModal,
+    PartnerModal,
+    EditPartnerModal,
+    // ✅ OBLIGATOIRE
   ],
   templateUrl: './admin-layout.html',
   styleUrls: ['./admin-layout.css']

@@ -1,0 +1,71 @@
+<div class="partners-page">
+
+  <div class="header">
+    <h2>Partenaires MeduBot</h2>
+
+    <button class="btn-add" (click)="modal.openPartner()">
+      ➕ Ajouter partenaire
+    </button>
+  </div>
+
+  <table class="partners-table">
+    <thead>
+      <tr>
+        <th>Société</th>
+        <th>Type</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+        <th>Quantité</th>
+        <th>Statut</th>
+        <th>Montant (DT)</th>
+        <th>Actions</th>
+        
+      </tr>
+    </thead>
+
+  <tbody>
+  <tr *ngFor="let p of partners$ | async">
+    <td>{{ p.name }}</td>
+    <td>{{ getTypeLabel(p.type) }}</td>
+    <td>{{ p.startDate }}</td>
+    <td>{{ p.endDate || '-' }}</td>
+    <td>{{ p.phone }}</td>
+    <td>{{ p.email }}</td>
+
+    <!-- ✅ Quantité -->
+    <td class="quantity-cell">
+      <span class="quantity-label">
+        {{ getQuantityLabel(p.type) }}
+      </span>
+      <span class="quantity-value">
+        {{ p.quantity }} {{ p.unit }}
+      </span>
+    </td>
+
+    <td>
+      <span
+        class="status"
+        [ngClass]="p.status === 'ACTIVE' ? 'active' : 'finished'">
+        {{ getStatusLabel(p.status) }}
+      </span>
+    </td>
+<td class="amount-cell">
+  <span *ngIf="p.amount; else noAmount">
+    {{ p.amount }} DT
+  </span>
+  <ng-template #noAmount>
+    <span class="text-muted">—</span>
+  </ng-template>
+</td>
+    <td class="actions">
+      <button class="edit" (click)="editPartner(p)">✏️</button>
+      <button class="delete" (click)="deletePartner(p.id)">🗑️</button>
+    </td>
+  </tr>
+</tbody>
+
+  </table>
+
+</div>

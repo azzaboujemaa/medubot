@@ -1,0 +1,87 @@
+<div class="meduse-page">
+
+  <!-- HEADER -->
+  <h2>📊 Répartition des méduses</h2>
+  <p class="subtitle">Suivi de la collecte et de la valorisation</p>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+
+    <div class="kpi-card">
+      <h4>Méduses collectées</h4>
+      <p class="kpi-value">{{ collectedKg }} kg</p>
+    </div>
+
+    <div class="kpi-card green">
+      <h4>Méduses vendues</h4>
+      <p class="kpi-value">{{ soldCosmeticKg + soldFertilizerKg }} kg</p>
+    </div>
+
+    <div class="kpi-card yellow">
+      <h4>Stock restant</h4>
+      <p class="kpi-value">{{ stockKg }} kg</p>
+    </div>
+
+  </div>
+
+  <!-- INDICATORS -->
+  <div class="indicators">
+
+    <div class="indicator">
+      ♻️ Taux de valorisation :
+      <strong>{{ valorisationRate }}%</strong>
+    </div>
+
+    <div class="indicator">
+      💰 Chiffre d’affaires :
+      <strong>{{ revenueDT }} DT</strong>
+    </div>
+
+  </div>
+
+  <!-- TABLE PARTNERS -->
+  <div class="table-card">
+    <h3>📋 Valorisation par partenaire</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Partenaire</th>
+          <th>Type</th>
+          <th>Quantité (kg)</th>
+          <th>Montant (DT)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let p of partners">
+          <td>{{ p.name }}</td>
+          <td>{{ p.type }}</td>
+          <td>{{ p.quantity }}</td>
+          <td>{{ p.amount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!-- TABLE ZONES -->
+<div class="table-card">
+  <h3>📍 Collecte par zone</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Zone</th>
+        <th>Quantité collectée (kg)</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let z of zones">
+        <td>{{ z.name }}</td>
+        <td>{{ z.quantityKg }} kg</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>

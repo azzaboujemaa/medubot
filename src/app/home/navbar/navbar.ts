@@ -1,106 +1,79 @@
-import { Component, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Modal } from '../../services/modal';
+import { AuthService } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css'],
-  imports: [
-    CommonModule,
-    FormsModule,
-    
-  ]
+  imports: [CommonModule, FormsModule]
 })
-export class Navbars implements AfterViewInit{
-  fullName = '';
+export class Navbars implements AfterViewInit {
+
   email = '';
   password = '';
-  confirmPassword = '';
-  submitted = false;
+  loginError = '';
 
-  constructor(public modal: Modal) {}
+  constructor(
+    public modal: Modal,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
 
-    const links = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll<HTMLElement>('section');
+    const navLinks = document.querySelectorAll<HTMLElement>('.nav-link');
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         entries.forEach(entry => {
-          const id = entry.target.getAttribute('id');
-
           if (entry.isIntersecting) {
-            links.forEach(link => {
-              link.classList.remove('active-section'); // retire le style des autres
+            const id = entry.target.id;
+
+            navLinks.forEach(link => {
+              link.classList.remove('active-section');
 
               if (link.getAttribute('data-section') === id) {
-                link.classList.add('active-section'); // applique au bon
+                link.classList.add('active-section');
               }
             });
           }
         });
       },
-      {
-        threshold: 0.6 // 60% visible → devient actif
-      }
+      { threshold: 0.6 }
     );
 
     sections.forEach(section => observer.observe(section));
   }
 
-  // Ouvrir modales
-  openSignIn() {
-    this.modal.openSignIn();
+  onForgotPassword() {
+    this.modal.openForgotPassword();
   }
 
-  openCreateAccount() {
-    this.modal.openCreateAccount();
-  }
+  async login() {
+    this.loginError = '';
 
-  // Fermer toutes les modales
-  closeModal() {
-    this.modal.closeAll();
-  }
+    try {
+      const user: any = await this.authService.login(
+        this.email,
+        this.password
+      );
 
-  // Création de compte
-  createAccount() {
-    this.submitted = true;
+      if (user.role === 'ADMIN') {
+        this.router.navigate(['/admin/dashboard']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
 
-    if (
-      !this.fullName ||
-      !this.isValidEmail(this.email) ||
-      !this.isValidPassword(this.password) ||
-      this.password !== this.confirmPassword
-    ) {
-      console.log('❌ Formulaire invalide');
-      return;
+      this.modal.closeAll();
+
+    } catch (err) {
+      this.loginError = 'Email ou mot de passe incorrect';
     }
-
-    alert('✅ Compte créé avec succès !');
-    this.resetForm();
-    this.modal.openSignIn(); // ouvre Sign In après création
-  }
-
-  isValidEmail(email: string): boolean {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  }
-
-  isValidPassword(password: string): boolean {
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    return passwordPattern.test(password);
-  }
-
-  resetForm() {
-    this.fullName = '';
-    this.email = '';
-    this.password = '';
-    this.confirmPassword = '';
-    this.submitted = false;
   }
 }

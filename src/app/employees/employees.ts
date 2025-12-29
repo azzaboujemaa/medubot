@@ -18,6 +18,8 @@ interface Employee {
   name: string;
   email: string;
   role: 'ADMIN' | 'EMPLOYEE' | 'OPERATOR' | 'MAINTENANCE';
+  robotId ?: string;
+  zone?: string; 
   active: boolean;
   createdAt?: any;
 }
@@ -61,7 +63,7 @@ export class EmployeesComponent implements OnInit {
   /* 🎭 Label rôle */
   getRoleLabel(role: string): string {
     switch (role) {
-      case 'ADMIN': return 'Admin';
+      
       case 'OPERATOR': return 'Opérateur';
       case 'MAINTENANCE': return 'Maintenance';
       default: return 'Employé';

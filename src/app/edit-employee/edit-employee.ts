@@ -44,6 +44,8 @@ export class EditEmployeeModal implements OnInit {
     await updateDoc(ref, {
       name: this.employee.name,
       role: this.employee.role,
+        robotId: this.employee.robotId || null,
+        zone: this.employee.zone || null,
       active: this.employee.active ?? true,
       updatedAt: new Date()
     });

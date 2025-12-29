@@ -1,0 +1,24 @@
+<div class="modal-backdrop" (click)="close()"></div>
+
+<div class="modal-container">
+  <h2>Ajouter partenaire</h2>
+
+  <form (ngSubmit)="submit()">
+    <input placeholder="Nom société" [(ngModel)]="partner.name" name="name" required />
+    <input placeholder="Téléphone" [(ngModel)]="partner.phone" name="phone" />
+    <input placeholder="Email" [(ngModel)]="partner.email" name="email" />
+
+    <select [(ngModel)]="partner.type" name="type">
+      <option value="HOTEL">Hôtel (nettoyage)</option>
+      <option value="COSMETIC">Cosmétique</option>
+      <option value="FERTILIZER">Engrais organique</option>
+    </select>
+
+    <input type="date" [(ngModel)]="partner.startDate" name="startDate" />
+
+    <div class="actions">
+      <button type="button" (click)="close()">Annuler</button>
+      <button type="submit">Enregistrer</button>
+    </div>
+  </form>
+</div>

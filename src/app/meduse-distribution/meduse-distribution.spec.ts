@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditEmployeeModal } from './edit-employee';
+import { MeduseDistribution } from './meduse-distribution';
 
-describe('EditEmployee', () => {
-  let component: EditEmployeeModal;
-  let fixture: ComponentFixture< EditEmployeeModal>;
+describe('MeduseDistribution', () => {
+  let component: MeduseDistribution;
+  let fixture: ComponentFixture<MeduseDistribution>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ EditEmployeeModal]
+      imports: [MeduseDistribution]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent( EditEmployeeModal);
+    fixture = TestBed.createComponent(MeduseDistribution);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

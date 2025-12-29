@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Modal } from '../services/modal';
 
 @Component({
   selector: 'app-sidebar-admin',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './sidebar-admin.html',
   styleUrl: './sidebar-admin.css',
 })
@@ -31,11 +31,11 @@ export class SidebarAdmin {
   }
 
   goRobots() {
-    this.router.navigate(['/admin/robots']);
+    this.router.navigate(['/admin/dashboard']);
   }
 
   goMap() {
-    this.router.navigate(['/admin/map']);
+    this.router.navigate(['/admin/robots-map']);
   }
 
   goEmployees() {
@@ -52,11 +52,12 @@ export class SidebarAdmin {
   }
 
   goJellyfishAnalytics() {
-    this.router.navigate(['/admin/jellyfish-analytics']);
-  }
+  this.router.navigate(['/admin/meduse-distribution']);
+}
+
 
   logout() {
-    this.router.navigate(['/logout']);
+    this.router.navigate(['/']);
   }
    // 🔥 ouvre la modale
   }

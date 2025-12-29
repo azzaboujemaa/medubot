@@ -1,0 +1,89 @@
+<div class="modal-backdrop" (click)="cancel()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+
+    <h2>Modifier partenaire</h2>
+
+    <form (ngSubmit)="save()">
+
+      <!-- Société -->
+      <input
+        placeholder="Nom société"
+        [(ngModel)]="partner.name"
+        name="name"
+        required
+      />
+
+      <!-- Téléphone -->
+      <input
+        placeholder="Téléphone"
+        [(ngModel)]="partner.phone"
+        name="phone"
+      />
+
+      <!-- Email -->
+      <input
+        placeholder="Email"
+        type="email"
+        [(ngModel)]="partner.email"
+        name="email"
+      />
+
+      <!-- Type -->
+      <select [(ngModel)]="partner.type" name="type">
+        <option value="HOTEL">Hôtel – Nettoyage</option>
+        <option value="COSMETIC">Cosmétique</option>
+        <option value="FERTILIZER">Engrais organique</option>
+      </select>
+
+      <!-- Date début -->
+      <input
+        type="date"
+        [(ngModel)]="partner.startDate"
+        name="startDate"
+      />
+
+      <!-- Date fin -->
+      <input
+        type="date"
+        [(ngModel)]="partner.endDate"
+        name="endDate"
+      />
+
+      <!-- Quantité -->
+      <input
+        type="number"
+        placeholder="Quantité"
+        [(ngModel)]="partner.quantity"
+        name="quantity"
+      />
+
+      <!-- Unité -->
+      <input
+        placeholder="Unité (kg, km, etc.)"
+        [(ngModel)]="partner.unit"
+        name="unit"
+      />
+
+      <!-- Montant -->
+      <input
+        type="number"
+        placeholder="Montant (DT)"
+        [(ngModel)]="partner.amount"
+        name="amount"
+      />
+
+      <!-- Statut -->
+      <select [(ngModel)]="partner.status" name="status">
+        <option value="ACTIVE">Active</option>
+        <option value="FINISHED">Terminée</option>
+      </select>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button type="button" (click)="cancel()">Annuler</button>
+        <button type="submit">Enregistrer</button>
+      </div>
+
+    </form>
+  </div>
+</div>

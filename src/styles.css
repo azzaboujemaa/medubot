@@ -2,3 +2,126 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* =============================== */
+/* ===== MODALE (GLOBAL) ========= */
+/* =============================== */
+
+/* 🔹 BACKDROP (fond derrière la modale) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55); /* bleu foncé transparent */
+  z-index: 2000; /* 🔥 plus haut que la navbar */
+}
+
+/* 🔹 MODAL BOX */
+.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  max-width: 90%;
+  background: linear-gradient(180deg, #1e3a8a, #1e40af);
+  border-radius: 18px;
+  padding: 28px 26px 24px;
+  color: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  z-index: 2001; /* 🔥 au-dessus du backdrop */
+}
+
+/* 🔹 TITRE */
+.modal-box h2,
+.modal-box .title {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 🔹 BOUTON FERMER */
+.modal-box .close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.modal-box .close-btn:hover {
+  opacity: 1;
+}
+
+/* 🔹 FORMULAIRE */
+.modal-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 🔹 LABELS (BIEN VISIBLES) */
+.modal-box label {
+  font-size: 14px;
+  color: #e0e7ff; /* 🔥 lisible sur fond bleu */
+  font-weight: 500;
+}
+
+/* 🔹 INPUTS */
+.modal-box input,
+.modal-box select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.modal-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-box input:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* 🔹 BOUTON PRINCIPAL */
+.btn-login {
+  margin-top: 10px;
+  background:#ffd166;
+  color: #0b1c3d;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-login:hover {
+  filter: brightness(1.05);
+}
+
+/* 🔹 TEXTE LIEN */
+.register-text {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.register-text a {
+  color: #ffd166;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}

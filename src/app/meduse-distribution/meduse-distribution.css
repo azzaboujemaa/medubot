@@ -1,0 +1,91 @@
+.meduse-page {
+  padding: 30px;
+  color: white;
+}
+
+.subtitle {
+  color: #bcd3ff;
+  margin-bottom: 24px;
+}
+
+/* KPI GRID */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.kpi-card h4 {
+  font-size: 14px;
+  color: #c7d2fe;
+}
+
+.kpi-value {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* COLORS */
+.green { border-left: 4px solid #4dffb2; }
+.yellow { border-left: 4px solid #facc15; }
+.red { border-left: 4px solid #ff6b6b; }
+
+/* INDICATORS */
+.indicators {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.indicator {
+  background: rgba(255,255,255,0.06);
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+/* TABLE */
+.table-card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.table-card h3 {
+  margin-bottom: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  font-size: 14px;
+  color: #a5b4fc;
+  padding-bottom: 10px;
+}
+
+td {
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+/* ZONE TABLE */
+.table-card + .table-card {
+  margin-top: 24px;
+}
+
+td:last-child {
+  font-weight: 600;
+  color: #4dffb2;
+}
+

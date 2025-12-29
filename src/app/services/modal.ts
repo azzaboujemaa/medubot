@@ -7,10 +7,10 @@ export class Modal {
   // 🔐 Auth / Account
   private _showSignIn = new BehaviorSubject<boolean>(false);
   private _showCreateAccount = new BehaviorSubject<boolean>(false);
-
+private _showForgotPassword = new BehaviorSubject<boolean>(false);
   // 🤝 Partner modal
   private _showPartner = new BehaviorSubject<boolean>(false);
-
+  private _editPartner = new BehaviorSubject<any | null>(null);
   // ✏️ Edit Employee
   private _editEmployee = new BehaviorSubject<any | null>(null);
 
@@ -19,7 +19,8 @@ export class Modal {
   showCreateAccount$ = this._showCreateAccount.asObservable();
   showPartner$ = this._showPartner.asObservable();
   editEmployee$ = this._editEmployee.asObservable();
-
+  editPartner$ = this._editPartner.asObservable();
+  showForgotPassword$ = this._showForgotPassword.asObservable();
   // ======================
   // 🔐 SIGN IN
   // ======================
@@ -29,6 +30,12 @@ export class Modal {
     this._showPartner.next(false);
     this._editEmployee.next(null);
   }
+  openPartner() {
+  this._showPartner.next(true);
+}
+  closePartner() {
+  this._showPartner.next(false);
+}
 
   closeSignIn() {
     this._showSignIn.next(false);
@@ -70,5 +77,30 @@ export class Modal {
     this._showCreateAccount.next(false);
     this._showPartner.next(false);
     this._editEmployee.next(null);
+    this._showForgotPassword.next(false);
+
   }
+openEditPartner(partner: any) {
+  this._editPartner.next(partner);
+  this._showPartner.next(false);
+  this._editEmployee.next(null);
+}
+
+// FERMER
+closeEditPartner() {
+  this._editPartner.next(null);
+}
+// 🔐 FORGOT PASSWORD
+openForgotPassword() {
+  this._showForgotPassword.next(true);
+  this._showSignIn.next(false);
+  this._showCreateAccount.next(false);
+}
+
+closeForgotPassword() {
+  this._showForgotPassword.next(false);
+}
+
+
+
 }

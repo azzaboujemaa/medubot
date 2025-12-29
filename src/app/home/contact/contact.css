@@ -40,7 +40,7 @@
 .contact-info-card h3 {
   font-size: 26px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #6a5acd;
+  border-bottom: 2px solid #ffd166;
   padding-bottom: 8px;
 }
 
@@ -54,7 +54,7 @@
 
 .info-item i {
   font-size: 20px;
-  color: #6a5acd;
+  color:#ffd166;
 }
 
 /* RIGHT FORM */
@@ -91,8 +91,8 @@
 }
 
 .contact-form button {
-  background: #6a5acd;
-  color: white;
+  background: #ffd166;
+  color: black;
   padding: 12px;
   border-radius: 10px;
   font-size: 18px;
@@ -102,6 +102,6 @@
 }
 
 .contact-form button:hover {
-  background: #7b6dff;
+  background: #ffd166;
   transform: translateY(-3px);
 }

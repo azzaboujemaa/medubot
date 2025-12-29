@@ -1,0 +1,16 @@
+.robots-map-page {
+  padding: 30px;
+  color: white;
+}
+
+.subtitle {
+  color: #bcd3ff;
+  margin-bottom: 16px;
+}
+
+#robotsMap {
+  height: 500px;          /* OBLIGATOIRE */
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}

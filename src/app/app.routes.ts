@@ -9,12 +9,23 @@ import { DashboardLayout } from './layout/public-layout/dashboard-layout/dashboa
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
 import { AdminLayout} from './admin-layout/admin-layout';
 import { EmployeesComponent } from './employees/employees';
+import { Partner } from './partner/partner';
+import { MeduseDistribution } from './meduse-distribution/meduse-distribution';
+import { RobotCard } from './dashboard/robot-card/robot-card';
+import { RobotsMap } from './robots-map/robots-map';
+import { Messages } from './messages/messages';
+import { Path } from 'leaflet';
+import { Component } from '@angular/core';
+import { Accueil } from './home/accueil/accueil';
+import { Contact } from './home/contact/contact';
+import { Environnement } from './home/environnement/environnement';
+import { NotreMission } from './home/notre-mission/notre-mission';
 
 export const routes: Routes = [
 
   // 🌍 PUBLIC
   {
-  path:'',
+  path:'dashboard',
   component: DashboardLayout,
     children: [
       { path: 'dashboard', component: Dashboard },
@@ -24,13 +35,27 @@ export const routes: Routes = [
       {path:'', redirectTo: 'dashboard', pathMatch: 'full'},
     ],
   },
-   {path:'home', component:PublicLayout},
+  {
+    path:'',
+    component: PublicLayout,
+    children:[
+      {path:'accueil', component: Accueil},
+      {path:'contact', component: Contact},
+      {path:'environnement', component: Environnement},
+      {path:'notre-mission', component: NotreMission}
+    ]
+  },
      {
     path: 'admin',
     component: AdminLayout,
     children: [
       { path: 'dashboard', component: AdminDashboard },
-       { path: 'employees', component: EmployeesComponent }
+       { path: 'employees', component: EmployeesComponent },
+       {path:'partners', component: Partner},
+       {path:'meduse-distribution', component: MeduseDistribution},
+       {path:'robots-map', component:RobotsMap},
+       {path:'messages', component: Messages},
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
      { path: '**', redirectTo: 'dashboard' },

@@ -20,10 +20,13 @@
       <span *ngIf="isOpen">Robots</span>
     </div>
 
-    <div class="sidebar-item" (click)="goMap()">
-      <i class="fas fa-map-location-dot"></i>
-      <span *ngIf="isOpen">Carte des robots </span>
-    </div>
+   <div
+  class="sidebar-item"
+  routerLink="/admin/robots-map"
+  routerLinkActive="active">
+  <i class="fas fa-map-location-dot"></i>
+  <span *ngIf="isOpen">Carte des robots</span>
+</div>
 
     <!-- GESTION -->
     <div class="sidebar-item" (click)="goEmployees()">
@@ -44,10 +47,11 @@
       <span *ngIf="isOpen">Partenaires</span>
     </div>
 
-    <div class="sidebar-item" (click)="goJellyfishAnalytics()">
-      <i class="fas fa-chart-pie"></i>
-      <span *ngIf="isOpen">répartition des méduses</span>
-    </div>
+  <div class="sidebar-item" (click)="goJellyfishAnalytics()">
+  <i class="fas fa-chart-pie"></i>
+  <span *ngIf="isOpen">Répartition des méduses</span>
+</div>
+
 
   </div>
 
