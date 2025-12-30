@@ -4,6 +4,7 @@ import { Profile } from './profile/profile';
 import { FullMap } from './full-map/full-map';
 import { History } from './history/history';
 import { Dashboard } from './dashboard/dashboard';
+import { Chat } from './dashboard/chat/chat';
 import { DashboardLayout } from './layout/public-layout/dashboard-layout/dashboard-layout';
 
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
@@ -31,6 +32,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: Dashboard },
       { path: 'history', component: History },
       { path: 'profile', component: Profile},
+      { path: 'chat', component: Chat }, 
       { path: 'map', component: FullMap },
       {path:'', redirectTo: 'dashboard', pathMatch: 'full'},
     ],

@@ -6,7 +6,7 @@ import { Topbar } from '../../../topbar/topbar';
 
 @Component({
   selector: 'app-dashboard-layout',
-  standalone: true, // 🔥 هذا هو الأهم
+  standalone: true, 
   imports: [Sidebar, RouterOutlet, Topbar],
   templateUrl: './dashboard-layout.html',
   styleUrls: ['./dashboard-layout.css'],

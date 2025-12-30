@@ -1,37 +1,51 @@
-<div 
-  class="h-screen bg-blue-900 bg-opacity-40 backdrop-blur-xl flex flex-col justify-between transition-all duration-300"
+<div
+  class="h-screen bg-blue-900 bg-opacity-40 backdrop-blur-xl
+         flex flex-col justify-between transition-all duration-300"
   [class.w-20]="!isOpen"
   [class.w-64]="isOpen"
   (mouseenter)="openSidebar()"
   (mouseleave)="closeSidebar()">
 
-  <!-- TOP -->
+  <!-- 🔼 TOP -->
   <div class="flex flex-col items-center mt-6 space-y-10">
 
+    <!-- LOGO -->
     <img src="assets/images/logo.jpg" class="w-12 opacity-90" />
 
+    <!-- DASHBOARD -->
     <div class="sidebar-item" (click)="goDashboard()">
       <i class="fas fa-robot"></i>
-      <span *ngIf="isOpen">Robot</span>
+      <span *ngIf="isOpen">Dashboard</span>
     </div>
 
+    <!-- HISTORIQUE -->
     <div class="sidebar-item" (click)="goHistory()">
       <i class="fas fa-history"></i>
       <span *ngIf="isOpen">Historique</span>
     </div>
 
+    <!-- PROFIL -->
     <div class="sidebar-item" (click)="goProfile()">
       <i class="fas fa-user"></i>
       <span *ngIf="isOpen">Profil</span>
     </div>
 
+    <!-- 💬 CHAT -->
+    <div class="sidebar-item" (click)="goChat()">
+      <i class="fas fa-comments"></i>
+      <span *ngIf="isOpen">Chat</span>
+    </div>
+
   </div>
 
-  <!-- BOTTOM -->
+  <!-- 🔽 BOTTOM -->
   <div class="mb-6 flex justify-center">
-    <div class="sidebar-item text-red-300 hover:text-red-100">
+    <div
+      class="sidebar-item text-red-300 hover:text-red-100 cursor-pointer"
+      (click)="logout()">
+
       <i class="fas fa-sign-out-alt"></i>
-      <span *ngIf="isOpen">Logout</span>
+      <span *ngIf="isOpen">Déconnexion</span>
     </div>
   </div>
 

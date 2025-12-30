@@ -56,24 +56,38 @@ export class Navbars implements AfterViewInit {
   }
 
   async login() {
-    this.loginError = '';
+  this.loginError = '';
 
-    try {
-      const user: any = await this.authService.login(
-        this.email,
-        this.password
-      );
+  try {
+    const user = await this.authService.login(
+      this.email,
+      this.password
+    );
 
-      if (user.role === 'ADMIN') {
+    // 🔁 REDIRECTION PAR RÔLE
+    switch (user.role) {
+
+      case 'ADMIN':
         this.router.navigate(['/admin/dashboard']);
-      } else {
-        this.router.navigate(['/dashboard']);
-      }
+        break;
 
-      this.modal.closeAll();
+      case 'EMPLOYEE':
+      case 'OPERATOR':
+      case 'MAINTENANCE':
+        this.router.navigate(['/dashboard/dashboard']);
+        break;
 
-    } catch (err) {
-      this.loginError = 'Email ou mot de passe incorrect';
+      default:
+        this.loginError = 'Rôle inconnu';
+        return;
     }
+
+    // fermer modal
+    this.modal.closeAll();
+
+  } catch (err) {
+    this.loginError = 'Email ou mot de passe incorrect';
   }
+}
+
 }

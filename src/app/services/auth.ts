@@ -6,6 +6,7 @@ import {
   signOut
 } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { EmployeeProfile } from '../models/employee-profile';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -18,38 +19,42 @@ export class AuthService {
   // =========================
   // 🔐 LOGIN + ROLE
   // =========================
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<EmployeeProfile> {
+
     const cred = await signInWithEmailAndPassword(this.auth, email, password);
     const uid = cred.user.uid;
 
-    // ADMIN
+    // 🔎 ADMIN
     const adminRef = doc(this.firestore, `users/${uid}`);
     const adminSnap = await getDoc(adminRef);
 
     if (adminSnap.exists()) {
-      return { ...adminSnap.data(), role: 'ADMIN' };
+      return {
+        id: uid,
+        ...(adminSnap.data() as EmployeeProfile),
+        role: 'ADMIN'
+      };
     }
 
-    // EMPLOYEE / OPERATOR / MAINTENANCE
+    // 🔎 EMPLOYEE / OPERATOR / MAINTENANCE
     const empRef = doc(this.firestore, `employees/${uid}`);
     const empSnap = await getDoc(empRef);
 
     if (empSnap.exists()) {
-      return empSnap.data();
+      return {
+        id: uid,
+        ...(empSnap.data() as EmployeeProfile)
+      };
     }
 
     throw new Error('Utilisateur non trouvé');
   }
 
   // =========================
-  // 🧑‍💼 CREATE USER
-  // =========================
   createUser(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  // =========================
-  // 🚪 LOGOUT
   // =========================
   logout() {
     return signOut(this.auth);

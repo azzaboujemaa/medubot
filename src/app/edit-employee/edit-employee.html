@@ -17,19 +17,24 @@
       [value]="employee.email"
       disabled
     />
-<label>ID Robot</label>
-<input
-  type="text"
-  [(ngModel)]="employee.robotId"
-  placeholder="MB-201"
-/>
 
-<label>Zone de plage</label>
-<input
-  type="text"
-  [(ngModel)]="employee.zone"
-  placeholder="Plage Sousse Nord"
-/>
+    <!-- 🤖 ROBOT (LISTE) -->
+    <label>ID Robot</label>
+    <select [(ngModel)]="employee.robotId">
+      <option value="" disabled>Choisir un robot</option>
+      <option *ngFor="let r of robotIds" [value]="r">
+        {{ r }}
+      </option>
+    </select>
+
+    <!-- 🏖️ ZONE (API) -->
+    <label>Zone de plage</label>
+    <select [(ngModel)]="employee.zone">
+      <option value="" disabled>Choisir une zone</option>
+      <option *ngFor="let z of zones" [value]="z">
+        {{ z }}
+      </option>
+    </select>
 
     <!-- Rôle -->
     <label>Rôle</label>

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { serverTimestamp } from 'firebase/firestore';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Modal } from '../services/modal';
+import { BeachService } from '../services/beach';
 
 @Component({
   selector: 'app-employee-modal',
@@ -13,7 +14,7 @@ import { Modal } from '../services/modal';
   templateUrl: './create-account-modal.html',
   styleUrls: ['./create-account-modal.css']
 })
-export class EmployeeModal {
+export class EmployeeModal implements OnInit {
 
   // 👤 Employé
   employee = {
@@ -22,7 +23,7 @@ export class EmployeeModal {
     role: 'EMPLOYEE'
   };
 
-  // 🤖 Robots disponibles
+  // 🤖 Robots
   robotIds: string[] = [
     'MeduBot A01',
     'MeduBot A02',
@@ -32,21 +33,12 @@ export class EmployeeModal {
     'MeduBot E01'
   ];
 
-  // 🏖️ Zones
-  zones: string[] = [
-    'Sousse Nord',
-    'Port El Kantaoui',
-    'Monastir',
-    'Mahdia',
-    'Sfax',
-    'Bizerte'
-  ];
+  // 🏖️ Zones (API)
+  zones: string[] = [];
 
-  // ✅ Sélections
-  robotId: string = '';
-  zone: string = '';
+  robotId = '';
+  zone = '';
 
-  // 🔐 Mot de passe
   password = '';
   confirmPassword = '';
 
@@ -56,8 +48,33 @@ export class EmployeeModal {
   constructor(
     private authService: AuthService,
     private firestore: Firestore,
+    private beachService: BeachService,
     public modal: Modal
   ) {}
+
+  // ==========================
+  // 🚀 INIT
+  // ==========================
+  ngOnInit() {
+    this.loadBeaches();
+  }
+
+  // ==========================
+  // 🏖️ LOAD BEACHES FROM API
+  // ==========================
+  loadBeaches() {
+    this.beachService.getBeachesTunisia().subscribe({
+      next: (res: any) => {
+        this.zones = res.elements
+          .map((e: any) => e.tags?.name)
+          .filter((name: string) => !!name)
+          .slice(0, 50);
+      },
+      error: (err) => {
+        console.error('Erreur chargement plages', err);
+      }
+    });
+  }
 
   // ==========================
   // 📩 SUBMIT
@@ -65,7 +82,6 @@ export class EmployeeModal {
   async submit() {
     this.error = '';
 
-    // 🔒 VALIDATIONS
     if (!this.robotId) {
       this.error = 'Veuillez choisir un robot';
       return;
@@ -84,7 +100,6 @@ export class EmployeeModal {
     try {
       this.loading = true;
 
-      // 🔐 Création Auth
       const cred = await this.authService.createUser(
         this.employee.email,
         this.password
@@ -92,10 +107,7 @@ export class EmployeeModal {
 
       const uid = cred.user.uid;
 
-      // 💾 Firestore
-      const ref = doc(this.firestore, `employees/${uid}`);
-
-      await setDoc(ref, {
+      await setDoc(doc(this.firestore, `employees/${uid}`), {
         name: this.employee.name,
         email: this.employee.email,
         role: this.employee.role,
@@ -105,19 +117,21 @@ export class EmployeeModal {
         createdAt: serverTimestamp()
       });
 
-      // ✅ RESET FORM (optionnel mais pro)
+      // reset
       this.employee = { name: '', email: '', role: 'EMPLOYEE' };
       this.robotId = '';
       this.zone = '';
       this.password = '';
       this.confirmPassword = '';
 
-      // ✅ FERMER LA MODAL
       this.close();
 
     } catch (err: any) {
       console.error(err);
-      this.error = err.message || 'Erreur lors de la création';
+      this.error =
+        err.code === 'auth/email-already-in-use'
+          ? 'Cet email est déjà utilisé'
+          : 'Erreur lors de la création';
     } finally {
       this.loading = false;
     }

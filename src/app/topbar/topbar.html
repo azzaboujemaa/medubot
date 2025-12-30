@@ -18,15 +18,13 @@
     <div class="flex items-center space-x-3 cursor-pointer"
          (click)="toggleDropdown()">
 
-      <!-- Photo user -->
-      <div class="w-10 h-10 rounded-full overflow-hidden border border-white/30">
-        <img src="assets/images/user.jpg" class="w-full h-full object-cover">
-      </div>
+     
 
       <!-- Nom user -->
       <span class="font-medium text-white text-lg">
-        Imen ben haj khalifa
-      </span>
+            {{ userName || 'Utilisateur' }}
+             </span>
+
 
       <!-- flèche -->
       <i class="fas fa-chevron-down text-white"></i>

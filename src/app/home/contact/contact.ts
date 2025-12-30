@@ -16,42 +16,41 @@ export class Contact {
   message = '';
 constructor(private firestore: Firestore) {}
   async sendMessage() {
-    if (!this.name || !this.email || !this.message) {
-      alert('Veuillez remplir tous les champs.');
-      return;
-    }
+  if (!this.name || !this.email || !this.message) {
+    alert('Veuillez remplir tous les champs.');
+    return;
+  }
 
-    try {
-      // 1️⃣ Enregistrer le message
-      await addDoc(collection(this.firestore, 'messages'), {
-        name: this.name,
-        email: this.email,
-        message: this.message,
-        createdAt: serverTimestamp(),
-        read: false
-      });
+  try {
+    // 1️⃣ Message client
+    await addDoc(collection(this.firestore, 'messages'), {
+      name: this.name,
+      email: this.email,
+      message: this.message,
+      createdAt: serverTimestamp(),
+      read: false
+    });
 
-      // 2️⃣ Créer une notification admin
-      await addDoc(collection(this.firestore, 'notifications'), {
-        type: 'NEW_MESSAGE',
-        title: 'Nouveau message',
-        content: this.message,
-        createdAt: serverTimestamp(),
-        read: false
-      });
+    // 2️⃣ Notification ADMIN
+    await addDoc(collection(this.firestore, 'notifications'), {
+      title: 'Nouveau message',
+      content: this.message,
+      type: 'CONTACT',
+      toRole: 'ADMIN',   // 🔥 CLÉ
+      read: false,
+      createdAt: serverTimestamp()
+    });
 
-      alert('Merci ! Votre message a été envoyé avec succès ✅');
+    alert('Message envoyé ✅');
 
-      // 3️⃣ Reset formulaire
-      this.name = '';
-      this.email = '';
-      this.message = '';
+    this.name = '';
+    this.email = '';
+    this.message = '';
 
-    } catch (error) {
-      console.error(error);
-      alert('Erreur lors de l’envoi du message ❌');
-    }
+  } catch (e) {
+    console.error(e);
+    alert('Erreur ❌');
   }
 }
-
+}
 
