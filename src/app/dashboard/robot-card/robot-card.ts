@@ -7,7 +7,7 @@ import { EmployeeService } from '../../services/employee';
   templateUrl: './robot-card.html',
   styleUrl: './robot-card.css',
 })
-export class RobotCard implements OnInit {
+export class  RobotCard implements OnInit {
  robotId = '';   // 👈 affiché dans le dashboard
 
   constructor(private employee: EmployeeService) {}

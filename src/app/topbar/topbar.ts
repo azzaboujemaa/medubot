@@ -38,17 +38,20 @@ export class Topbar implements OnInit {
   ) {}
 
 async ngOnInit() {
+  
 
-  // 1️⃣ Charger le profil
   const profile = await this.employeeService.getMyProfileUniversal();
 
   this.userName = profile.name;
   this.userRole = profile.role;
 
   console.log('✅ USER ROLE:', this.userRole);
+  console.log('🔎 PROFILE COMPLET:', profile);
+  console.log('🔎 ROLE BRUT:', profile.role);
+  console.log('🔎 ROLE TYPE:', typeof profile.role);
 
   // 2️⃣ UNIQUEMENT ADMIN reçoit notifications CONTACT
-  if (this.userRole === 'ADMIN') {
+  if (this.userRole?.trim().toUpperCase() === 'ADMIN') {
 
     const q = query(
       collection(this.firestore, 'notifications'),
@@ -93,7 +96,16 @@ async ngOnInit() {
   }
 
   openAllMessages() {
-    this.notificationOpen = false;
+  this.notificationOpen = false;
+
+  const role = this.userRole?.trim().toUpperCase();
+
+  if (role === 'ADMIN') {
     this.router.navigate(['/admin/messages']);
   }
+
+  if (role === 'EMPLOYEE') {
+    this.router.navigate(['/dashboard/chat']);
+  }
+}
 }

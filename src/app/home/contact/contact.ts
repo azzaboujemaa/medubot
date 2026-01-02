@@ -23,25 +23,31 @@ constructor(private firestore: Firestore) {}
 
   try {
     // 1️⃣ Message client
-    await addDoc(collection(this.firestore, 'messages'), {
-      name: this.name,
-      email: this.email,
-      message: this.message,
-      createdAt: serverTimestamp(),
-      read: false
-    });
+    console.log('➡️ Début envoi message');
 
-    // 2️⃣ Notification ADMIN
-    await addDoc(collection(this.firestore, 'notifications'), {
-      title: 'Nouveau message',
-      content: this.message,
-      type: 'CONTACT',
-      toRole: 'ADMIN',   // 🔥 CLÉ
-      read: false,
-      createdAt: serverTimestamp()
-    });
+const msgRef = await addDoc(collection(this.firestore, 'messages'), {
+  name: this.name,
+  email: this.email,
+  message: this.message,
+  createdAt: serverTimestamp(),
+  read: false
+});
 
-    alert('Message envoyé ✅');
+console.log('✅ Message créé', msgRef.id);
+
+console.log('➡️ Création notification ADMIN');
+
+const notifRef = await addDoc(collection(this.firestore, 'notifications'), {
+  title: 'Nouveau message',
+  content: this.message,
+  type: 'CONTACT',
+  toRole: 'ADMIN',
+  read: false,
+  createdAt: serverTimestamp()
+});
+
+console.log('✅ Notification créée', notifRef.id);
+
 
     this.name = '';
     this.email = '';
