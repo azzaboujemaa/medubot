@@ -11,52 +11,61 @@ import { Firestore, collection, addDoc, serverTimestamp } from '@angular/fire/fi
   styleUrl: './contact.css',
 })
 export class Contact {
-   name = '';
+
+  name = '';
   email = '';
   message = '';
-constructor(private firestore: Firestore) {}
+
+  errorMessage = '';
+  showSuccess = false;
+
+  constructor(private firestore: Firestore) {}
+
   async sendMessage() {
-  if (!this.name || !this.email || !this.message) {
-    alert('Veuillez remplir tous les champs.');
-    return;
-  }
 
-  try {
-    // 1️⃣ Message client
-    console.log('➡️ Début envoi message');
+    // ❌ VALIDATION
+    if (!this.name || !this.email || !this.message) {
+      this.errorMessage = 'Veuillez remplir tous les champs.';
+      return;
+    }
 
-const msgRef = await addDoc(collection(this.firestore, 'messages'), {
-  name: this.name,
-  email: this.email,
-  message: this.message,
-  createdAt: serverTimestamp(),
-  read: false
-});
+    this.errorMessage = '';
 
-console.log('✅ Message créé', msgRef.id);
+    try {
+      // 📩 MESSAGE CLIENT
+      await addDoc(collection(this.firestore, 'messages'), {
+        name: this.name,
+        email: this.email,
+        message: this.message,
+        createdAt: serverTimestamp(),
+        read: false
+      });
 
-console.log('➡️ Création notification ADMIN');
+      // 🔔 NOTIFICATION ADMIN
+      await addDoc(collection(this.firestore, 'notifications'), {
+        title: 'Nouveau message',
+        content: this.message,
+        type: 'CONTACT',
+        toRole: 'ADMIN',
+        read: false,
+        createdAt: serverTimestamp()
+      });
 
-const notifRef = await addDoc(collection(this.firestore, 'notifications'), {
-  title: 'Nouveau message',
-  content: this.message,
-  type: 'CONTACT',
-  toRole: 'ADMIN',
-  read: false,
-  createdAt: serverTimestamp()
-});
+      // RESET FORM
+      this.name = '';
+      this.email = '';
+      this.message = '';
 
-console.log('✅ Notification créée', notifRef.id);
+      // ✅ SUCCESS OVERLAY
+      this.showSuccess = true;
 
+      setTimeout(() => {
+        this.showSuccess = false;
+      }, 2000);
 
-    this.name = '';
-    this.email = '';
-    this.message = '';
-
-  } catch (e) {
-    console.error(e);
-    alert('Erreur ❌');
+    } catch (e) {
+      console.error(e);
+      this.errorMessage = 'Erreur lors de l’envoi ❌';
+    }
   }
 }
-}
-

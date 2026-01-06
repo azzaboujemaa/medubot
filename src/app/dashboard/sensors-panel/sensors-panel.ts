@@ -8,63 +8,68 @@ import { Database, ref, onValue, get } from '@angular/fire/database';
 })
 export class SensorsPanelComponent implements OnInit {
 
-  temperature: number = 0;
-  turbidityStatus: string = "Chargement...";
+  temperature: number | null = null;
+  turbidityStatus: string = 'Chargement...';
 
   constructor(
     private db: Database,
     private zone: NgZone
   ) {}
 
-  ngOnInit() {
-    this.testFirebase();       // test direct
-    this.loadTemperature();    // température en temps réel
-    this.loadTurbidity();      // 🔥 turbidité en temps réel
+  ngOnInit(): void {
+    this.testFirebase();
+    this.listenTemperature();
+    this.listenTurbidity();
   }
 
-  // 🔥 Test direct Firebase (pour debug)
-  testFirebase() {
-    const dbRef = ref(this.db, 'temperature/value');
+  // 🧪 TEST DIRECT (une seule lecture)
+  testFirebase(): void {
+    const dbRef = ref(this.db, 'sensors/temperature');
 
     get(dbRef)
       .then(snapshot => {
-        console.log("🔥 TEST LECTURE DIRECTE =", snapshot.val());
+        console.log('🧪 TEST SNAPSHOT =', snapshot.val());
       })
       .catch(err => {
-        console.error("❌ Erreur Firebase :", err);
+        console.error('❌ Firebase error:', err);
       });
   }
 
-  // 🔥 Température
-  loadTemperature() {
-    const tempRef = ref(this.db, 'temperature/value');
+  // 🌡️ TEMPÉRATURE (temps réel)
+  listenTemperature(): void {
+    const tempRef = ref(this.db, 'sensors/temperature');
 
-    onValue(tempRef, (snapshot) => {
-      const value = snapshot.val();
-
-      console.log("🔥 Température en temps réel =", value);
-
-      if (value !== null && value !== undefined) {
-        this.zone.run(() => {
-          this.temperature = value;
-        });
+    onValue(tempRef, snapshot => {
+      if (!snapshot.exists()) {
+        console.warn('⚠️ Temperature node not found');
+        return;
       }
-    });
-  }
 
-  // 🔥 Turbidity : lecture du statut (ex: "Eau claire")
-  loadTurbidity() {
-    const turbRef = ref(this.db, 'turbidity/status');
-
-    onValue(turbRef, (snapshot) => {
-      const value = snapshot.val();
-
-      console.log("🌊 Turbidité =", value);
+      const data = snapshot.val();
+      console.log('🌡️ Temperature data =', data);
 
       this.zone.run(() => {
-        this.turbidityStatus = value ?? "Inconnu";
+        this.temperature = data?.value ?? null;
       });
     });
   }
 
+  // 💧 TURBIDITÉ (temps réel)
+  listenTurbidity(): void {
+    const turbRef = ref(this.db, 'sensors/turbidity');
+
+    onValue(turbRef, snapshot => {
+      if (!snapshot.exists()) {
+        console.warn('⚠️ Turbidity node not found');
+        return;
+      }
+
+      const data = snapshot.val();
+      console.log('💧 Turbidity data =', data);
+
+      this.zone.run(() => {
+        this.turbidityStatus = data?.status ?? 'Inconnu';
+      });
+    });
+  }
 }

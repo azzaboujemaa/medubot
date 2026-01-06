@@ -4,41 +4,44 @@
 
   <div class="contact-container">
 
-      <!-- RIGHT CARD — FORM -->
-   <form class="contact-form" (ngSubmit)="sendMessage()">
+    <!-- RIGHT CARD — FORM -->
+    <form class="contact-form" (ngSubmit)="sendMessage()">
 
-  <input
-    type="text"
-    placeholder="Votre nom"
-    [(ngModel)]="name"
-    name="name"
-    required
-  >
+      <input
+        type="text"
+        placeholder="Votre nom"
+        [(ngModel)]="name"
+        name="name"
+      >
 
-  <input
-    type="email"
-    placeholder="Votre email"
-    [(ngModel)]="email"
-    name="email"
-    required
-  >
+      <input
+        type="email"
+        placeholder="Votre email"
+        [(ngModel)]="email"
+        name="email"
+      >
 
-  <textarea
-    placeholder="Votre message"
-    [(ngModel)]="message"
-    name="message"
-    required>
-  </textarea>
+      <textarea
+        placeholder="Votre message"
+        [(ngModel)]="message"
+        name="message">
+      </textarea>
 
-  <button type="submit">
-    Envoyer
-  </button>
+      <!-- ❌ MESSAGE ERREUR (sous bouton) -->
+      <p class="error-msg" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
 
-</form>
+      <button type="submit">
+        Envoyer
+      </button>
+
+    </form>
 
     <!-- LEFT CARD — INFO -->
     <div class="contact-info-card">
       <h3>Get In Touch</h3>
+
       <div class="info-item">
         <i class="fas fa-map-marker-alt"></i>
         <span>Rue de la Mer, Sousse — Tunisie</span>
@@ -60,8 +63,13 @@
       </div>
     </div>
 
-  
-
   </div>
-
 </section>
+
+<!-- ✅ OVERLAY SUCCESS -->
+<div class="success-overlay" *ngIf="showSuccess">
+  <div class="success-box">
+    <div class="check-circle">✓</div>
+    <p>Message envoyé avec succès</p>
+  </div>
+</div>

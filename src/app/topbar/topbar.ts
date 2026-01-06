@@ -37,40 +37,42 @@ export class Topbar implements OnInit {
     private employeeService: EmployeeService
   ) {}
 
-async ngOnInit() {
-  
+  async ngOnInit() {
 
-  const profile = await this.employeeService.getMyProfileUniversal();
+    const profile = await this.employeeService.getMyProfileUniversal();
 
-  this.userName = profile.name;
-  this.userRole = profile.role;
+    this.userName = profile.name;
+    this.userRole = profile.role;
 
-  console.log('✅ USER ROLE:', this.userRole);
-  console.log('🔎 PROFILE COMPLET:', profile);
-  console.log('🔎 ROLE BRUT:', profile.role);
-  console.log('🔎 ROLE TYPE:', typeof profile.role);
+    console.log('✅ USER ROLE:', this.userRole);
 
-  // 2️⃣ UNIQUEMENT ADMIN reçoit notifications CONTACT
-  if (this.userRole?.trim().toUpperCase() === 'ADMIN') {
+    // ✅ فقط ADMIN
+    if (this.userRole?.trim().toUpperCase() === 'ADMIN') {
 
-    const q = query(
-      collection(this.firestore, 'notifications'),
-      where('toRole', '==', 'ADMIN'),
-      where('read', '==', false)
-    );
+      const q = query(
+        collection(this.firestore, 'notifications'),
+        where('toRole', '==', 'ADMIN'),
+        where('read', '==', false)
+      );
 
-    collectionData(q, { idField: 'id' }).subscribe(data => {
-      console.log('🔔 NOTIFS ADMIN:', data);
-      this.notifications = data;
-      this.unreadCount = data.length;
-    });
+      collectionData(q, { idField: 'id' }).subscribe(data => {
+        console.log('🔔 NOTIFS ADMIN:', data);
 
-  } else {
-    this.notifications = [];
-    this.unreadCount = 0;
+        // 🔥 الترتيب في Angular (آخر message يطلع اللّول)
+        this.notifications = data.sort((a: any, b: any) => {
+          const t1 = a.createdAt?.toMillis?.() || 0;
+          const t2 = b.createdAt?.toMillis?.() || 0;
+          return t2 - t1; // DESC
+        });
+
+        this.unreadCount = this.notifications.length;
+      });
+
+    } else {
+      this.notifications = [];
+      this.unreadCount = 0;
+    }
   }
-}
-
 
   // =========================
   toggleDropdown() {
@@ -96,16 +98,16 @@ async ngOnInit() {
   }
 
   openAllMessages() {
-  this.notificationOpen = false;
+    this.notificationOpen = false;
 
-  const role = this.userRole?.trim().toUpperCase();
+    const role = this.userRole?.trim().toUpperCase();
 
-  if (role === 'ADMIN') {
-    this.router.navigate(['/admin/messages']);
+    if (role === 'ADMIN') {
+      this.router.navigate(['/admin/messages']);
+    }
+
+    if (role === 'EMPLOYEE') {
+      this.router.navigate(['/dashboard/chat']);
+    }
   }
-
-  if (role === 'EMPLOYEE') {
-    this.router.navigate(['/dashboard/chat']);
-  }
-}
 }

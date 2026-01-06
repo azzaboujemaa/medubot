@@ -44,7 +44,7 @@ export class MapPanel implements OnInit {
 
   listenToGPS() {
     const db = getDatabase();
-    const gpsRef = ref(db, 'medubot/gps');
+    const gpsRef = ref(db, 'sensors/gps');
 
     onValue(gpsRef, (snapshot) => {
       const gps = snapshot.val();
