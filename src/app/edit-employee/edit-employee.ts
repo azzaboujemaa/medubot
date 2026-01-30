@@ -67,9 +67,22 @@ export class EditEmployeeModal implements OnInit {
   // =====================
   // 💾 SAVE
   // =====================
-  async save() {
-    if (!this.employee?.id) return;
+ // =====================
+// 💾 SAVE avec permission
+// =====================
+async save() {
+  if (!this.employee?.id) return;
 
+  // 🔔 DEMANDE DE PERMISSION ICI
+  const ok = confirm(
+    `Voulez-vous vraiment enregistrer les modifications de : ${this.employee.name} ?`
+  );
+
+  if (!ok) {
+    return; // ❌ annuler l'enregistrement
+  }
+
+  try {
     const ref = doc(this.firestore, `employees/${this.employee.id}`);
 
     await updateDoc(ref, {
@@ -81,8 +94,15 @@ export class EditEmployeeModal implements OnInit {
       updatedAt: new Date()
     });
 
+    // ✅ fermer le modal après succès
     this.modal.closeEditEmployee();
+
+  } catch (err) {
+    console.error('Erreur modification employé', err);
+    alert('❌ Erreur lors de la modification');
   }
+}
+
 
   cancel() {
     this.modal.closeEditEmployee();

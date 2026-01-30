@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Firestore, doc, updateDoc, getDoc } from '@angular/fire/firestore';
-import { Auth } from '@angular/fire/auth';
+import {
+  Auth,
+  onAuthStateChanged,
+  User
+} from '@angular/fire/auth';
 import { EmployeeProfile } from '../models/employee-profile';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,50 +17,50 @@ export class EmployeeService {
     private auth: Auth
   ) {}
 
-  // 🔹 Récupérer le profil employee connecté
-   async getMyProfileUniversal(): Promise<EmployeeProfile> {
-  const user = this.auth.currentUser;
-  if (!user) {
-    throw new Error('Utilisateur non connecté');
+  // ✅ Attendre que Firebase restaure la session
+  private waitForAuth(): Promise<User> {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(this.auth, user => {
+        unsubscribe();
+        if (user) resolve(user);
+        else reject('Utilisateur non connecté');
+      });
+    });
   }
 
-  const uid = user.uid;
+  // 🔹 PROFIL UNIVERSEL (ADMIN / EMPLOYEE)
+  async getMyProfileUniversal(): Promise<EmployeeProfile> {
 
-  // 🔍 chercher dans users (ADMIN)
-  const adminRef = doc(this.firestore, `users/${uid}`);
-  const adminSnap = await getDoc(adminRef);
+    // ⏳ attendre Firebase
+    const user = await this.waitForAuth();
+    const uid = user.uid;
 
-  if (adminSnap.exists()) {
-    return {
-      id: uid,
-      ...(adminSnap.data() as EmployeeProfile)
-    };
-  }
+    // 🔍 ADMIN
+    const adminSnap = await getDoc(doc(this.firestore, `users/${uid}`));
+    if (adminSnap.exists()) {
+      return {
+        id: uid,
+        ...(adminSnap.data() as EmployeeProfile)
+      };
+    }
 
-  // 🔍 chercher dans employees
-  const empRef = doc(this.firestore, `employees/${uid}`);
-  const empSnap = await getDoc(empRef);
+    // 🔍 EMPLOYEE
+    const empSnap = await getDoc(doc(this.firestore, `employees/${uid}`));
+    if (empSnap.exists()) {
+      return {
+        id: uid,
+        ...(empSnap.data() as EmployeeProfile)
+      };
+    }
 
-  if (empSnap.exists()) {
-    return {
-      id: uid,
-      ...(empSnap.data() as EmployeeProfile)
-    };
-  }
-
-  throw new Error('Profil introuvable');
+    throw new Error('Profil introuvable');
   }
 
   // 🔹 Modifier SEULEMENT robot + zone
   async updateMyProfile(robotId: string, zone: string) {
-    const user = this.auth.currentUser;
-    if (!user) throw new Error('Utilisateur non connecté');
+    const user = await this.waitForAuth();
 
     const ref = doc(this.firestore, `employees/${user.uid}`);
-
-    return updateDoc(ref, {
-      robotId,
-      zone
-    });
+    return updateDoc(ref, { robotId, zone });
   }
 }

@@ -14,6 +14,12 @@ export class  RobotCard implements OnInit {
 
   async ngOnInit() {
     const profile = await this.employee.getMyProfileUniversal();
-    this.robotId = profile.robotId || '---';
+    if (!profile) {
+    this.robotId = '---';
+    return;
   }
+
+  this.robotId = profile.robotId || '---';
 }
+  }
+

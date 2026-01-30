@@ -14,7 +14,7 @@ import { EmployeeProfile } from '../models/employee-profile';
 })
 export class Profile implements OnInit {
 
-  user!: EmployeeProfile;
+  user: EmployeeProfile | null = null;
   zones: string[] = [];
 
   robotList = [
@@ -44,11 +44,18 @@ export class Profile implements OnInit {
     });
   }
 
-  async saveProfile() {
-    await this.employeeService.updateMyProfile(
-      this.user.robotId || '',
-      this.user.zone || ''
-    );
-    alert('Profil mis à jour ✅');
+ async saveProfile() {
+
+  // 🔒 Vérification obligatoire
+  if (!this.user) {
+    return;
   }
+
+  await this.employeeService.updateMyProfile(
+    this.user.robotId || '',
+    this.user.zone || ''
+  );
+
+  alert('Profil mis à jour ✅');
+}
 }

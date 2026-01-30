@@ -56,9 +56,19 @@ export class EmployeesComponent implements OnInit {
   }
 
   /* 🗑️ Supprimer (Firestore) */
-  async deleteEmployee(id: string) {
-    await deleteDoc(doc(this.firestore, `employees/${id}`));
+ async deleteEmployee(id: string) {
+
+  const ok = confirm(
+    '⚠️ Voulez-vous vraiment supprimer cet employé ?'
+  );
+
+  if (!ok) {
+    return; // ❌ annuler la suppression
   }
+
+  // ✅ supprimer après permission
+  await deleteDoc(doc(this.firestore, `employees/${id}`));
+}
 
   /* 🎭 Label rôle */
   getRoleLabel(role: string): string {

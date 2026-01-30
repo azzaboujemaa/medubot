@@ -41,8 +41,13 @@ export class Topbar implements OnInit {
 
     const profile = await this.employeeService.getMyProfileUniversal();
 
-    this.userName = profile.name;
-    this.userRole = profile.role;
+if (!profile) {
+  return; // ⏳ attendre Firebase
+}
+
+this.userName = profile.name;
+this.userRole = profile.role;
+
 
     console.log('✅ USER ROLE:', this.userRole);
 

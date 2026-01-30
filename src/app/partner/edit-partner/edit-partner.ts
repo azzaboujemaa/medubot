@@ -29,35 +29,46 @@ export class EditPartnerModal implements OnInit {
   }
 
   async save() {
-    if (!this.partner?.id) {
-      console.error('ID partenaire manquant');
-      return;
-    }
 
-    try {
-      const ref = doc(this.firestore, `partners/${this.partner.id}`);
-
-      await updateDoc(ref, {
-        name: this.partner.name,
-        phone: this.partner.phone,
-        email: this.partner.email,
-        type: this.partner.type,
-        startDate: this.partner.startDate,
-        endDate: this.partner.endDate || null,
-        quantity: this.partner.quantity || 0,
-        unit: this.partner.unit || '',
-        amount: this.partner.amount ?? null, 
-        status: this.partner.status || 'ACTIVE',
-        updatedAt: new Date()
-      });
-
-      console.log('✅ Partenaire modifié');
-      this.modal.closeEditPartner();
-
-    } catch (err) {
-      console.error('❌ Erreur modification partenaire', err);
-    }
+  if (!this.partner?.id) {
+    console.error('ID partenaire manquant');
+    return;
   }
+
+  const ok = confirm(
+    '⚠️ Voulez-vous vraiment enregistrer les modifications de ce partenaire ?'
+  );
+
+  if (!ok) {
+    return; // ❌ annuler l'enregistrement
+  }
+
+  try {
+    const ref = doc(this.firestore, `partners/${this.partner.id}`);
+
+    await updateDoc(ref, {
+      name: this.partner.name,
+      phone: this.partner.phone,
+      email: this.partner.email,
+      type: this.partner.type,
+      startDate: this.partner.startDate,
+      endDate: this.partner.endDate || null,
+      quantity: this.partner.quantity || 0,
+      unit: this.partner.unit || '',
+      amount: this.partner.amount ?? null,
+      status: this.partner.status || 'ACTIVE',
+      updatedAt: new Date()
+    });
+
+    console.log('✅ Partenaire modifié');
+    this.modal.closeEditPartner();
+
+  } catch (err) {
+    console.error('❌ Erreur modification partenaire', err);
+    alert('❌ Erreur lors de l’enregistrement');
+  }
+}
+
 
   cancel() {
     this.modal.closeEditPartner();

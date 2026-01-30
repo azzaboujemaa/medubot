@@ -59,9 +59,24 @@ export class Partner implements OnInit {
   }
 
   /* 🗑️ Supprimer */
-  async deletePartner(id: string) {
-    await deleteDoc(doc(this.firestore, `partners/${id}`));
+async deletePartner(id: string) {
+
+  const ok = confirm(
+    '⚠️ Voulez-vous vraiment supprimer ce partenaire ?'
+  );
+
+  if (!ok) {
+    return; // ❌ annuler la suppression
   }
+
+  try {
+    await deleteDoc(doc(this.firestore, `partners/${id}`));
+  } catch (err) {
+    console.error('Erreur suppression partenaire', err);
+    alert('❌ Erreur lors de la suppression');
+  }
+}
+
 
   /* 🎭 Labels */
   getTypeLabel(type: string): string {
