@@ -2,16 +2,28 @@
 
   <h2 class="text-xl font-semibold mb-4">la localisation du MEDUBOT</h2>
 
-  <!-- Carte -->
   <div id="map" class="rounded-xl overflow-hidden w-full h-[185px] mb-4"></div>
 
-  <!-- Bouton centré -->
   <div class="flex justify-center">
     <button 
-      routerLink="/full-map"
+      type="button"
+      (click)="openFullMap()"
       class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-semibold">
       Open Full Map
     </button>
   </div>
 
+</div>
+
+<div class="map-modal-backdrop" *ngIf="isFullMapOpen">
+  <div class="map-modal">
+    <div class="map-modal-header">
+      <h1>Map - Full Screen</h1>
+      <button type="button" class="close-btn" (click)="closeFullMap()">×</button>
+    </div>
+
+    <div class="map-modal-body">
+      <div id="full-map-modal"></div>
+    </div>
+  </div>
 </div>

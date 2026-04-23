@@ -6,7 +6,7 @@ import { MapPanel } from "./map-panel/map-panel";
 import { WeatherPanelComponent } from "./weather-panel/weather-panel";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dashboard', 
   standalone: true,
   imports: [ RobotCard, SensorsPanelComponent, CameraPanel, MapPanel, WeatherPanelComponent],
   templateUrl: './dashboard.html',

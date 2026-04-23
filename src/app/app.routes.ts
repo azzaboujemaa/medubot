@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { PublicLayout } from './layout/public-layout/public-layout';
 import { Profile } from './profile/profile';
-import { FullMap } from './full-map/full-map';
+
 import { History } from './history/history';
 import { Dashboard } from './dashboard/dashboard';
 import { Chat } from './dashboard/chat/chat';
@@ -33,7 +33,7 @@ export const routes: Routes = [
       { path: 'history', component: History },
       { path: 'profile', component: Profile},
       { path: 'chat', component: Chat }, 
-      { path: 'map', component: FullMap },
+      
       {path:'', redirectTo: 'dashboard', pathMatch: 'full'},
     ],
   },

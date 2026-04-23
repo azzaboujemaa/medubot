@@ -1,1 +1,30 @@
-<video #video autoplay controls playsinline class="video"></video>
+<div class="camera-panel">
+  <div class="camera-header">
+    <h3>Live Camera</h3>
+    <span class="live-badge">LIVE</span>
+  </div>
+
+  <div class="camera-body">
+    <img [src]="streamUrl" alt="Live Camera" class="camera-video" />
+  </div>
+
+  <div class="camera-footer">
+    <button class="open-camera-btn" (click)="openFullCamera()">
+      Open Full Camera
+    </button>
+  </div>
+</div>
+
+<!-- Modal Full Camera -->
+<div class="camera-modal-backdrop" *ngIf="isFullCameraOpen" (click)="closeFullCamera()">
+  <div class="camera-modal" (click)="$event.stopPropagation()">
+    <div class="camera-modal-header">
+      <h2>Live Camera - Full Screen</h2>
+      <button class="close-btn" (click)="closeFullCamera()">✕</button>
+    </div>
+
+    <div class="camera-modal-body">
+      <img [src]="streamUrl" alt="Full Live Camera" class="camera-video-full" />
+    </div>
+  </div>
+</div>

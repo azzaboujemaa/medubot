@@ -1,4 +1,150 @@
+.camera-panel {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  padding: 18px;
+  box-sizing: border-box;
+  background: rgba(34, 68, 180, 0.45);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.camera-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.live-badge {
+  background: #ff3b30;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.camera-body {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .camera-video {
   width: 100%;
-  border-radius: 12px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.camera-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.open-camera-btn {
+  background: #2f6df6;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.open-camera-btn:hover {
+  background: #4b82ff;
+  transform: translateY(-1px);
+}
+
+/* Modal */
+.camera-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 10, 30, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.camera-modal {
+  width: 90%;
+  max-width: 1200px;
+  height: 85vh;
+  background: #173aa8;
+  border-radius: 24px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.camera-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.camera-modal-header h2 {
+  margin: 0;
+  color: white;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.close-btn {
+  background: #ff3b30;
+  color: white;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.camera-modal-body {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 18px;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-video-full {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
