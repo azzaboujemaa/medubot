@@ -21,6 +21,7 @@ import { Accueil } from './home/accueil/accueil';
 import { Contact } from './home/contact/contact';
 import { Environnement } from './home/environnement/environnement';
 import { NotreMission } from './home/notre-mission/notre-mission';
+import { AdminChat } from './admin-chat/admin-chat';
 
 export const routes: Routes = [
 
@@ -57,6 +58,7 @@ export const routes: Routes = [
        {path:'meduse-distribution', component: MeduseDistribution},
        {path:'robots-map', component:RobotsMap},
        {path:'messages', component: Messages},
+       { path: 'admin-chat', component: AdminChat},
         { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

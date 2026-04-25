@@ -54,6 +54,25 @@
 
 
   </div>
+ <!-- CHAT -->
+<div class="sidebar-item relative" (click)="goChat()">
+  <i class="fas fa-comments"></i>
+  <span *ngIf="isOpen">Chat techniciens</span>
+
+  <!-- Badge non lus — positionné en absolu, ne perturbe pas la ligne -->
+  <span
+    *ngIf="hasUnread && isOpen"
+    class="ml-auto bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full"
+  >
+    {{ unreadCount }}
+  </span>
+
+  <!-- Point rouge quand sidebar fermée -->
+  <span
+    *ngIf="hasUnread && !isOpen"
+    class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-blue-900"
+  ></span>
+</div>
 
   <!-- BOTTOM -->
   <div class="mb-6 flex justify-center">

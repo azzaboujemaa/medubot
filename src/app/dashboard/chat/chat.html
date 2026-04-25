@@ -1,1 +1,95 @@
-<p>chat works!</p>
+<div class="flex flex-col h-full bg-blue-950 text-white rounded-xl overflow-hidden">
+
+  <!-- Header -->
+  <div class="p-4 border-b border-blue-800 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-lg">
+      👨‍💼
+    </div>
+    <div>
+      <div class="font-semibold">Admin MeduBot</div>
+      <div class="flex items-center gap-2 mt-0.5">
+        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+        <span class="text-xs text-blue-300">En ligne</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div #scrollContainer class="flex-1 overflow-y-auto p-4 space-y-3">
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="flex justify-center mt-10">
+      <div class="animate-spin w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full"></div>
+    </div>
+
+    <!-- Empty -->
+    <div *ngIf="!loading && messages.length === 0"
+      class="flex flex-col items-center justify-center h-full text-blue-400 gap-3">
+      <span class="text-5xl">💬</span>
+      <p class="font-semibold">Aucun message</p>
+      <p class="text-sm">Envoyez un message à l'admin</p>
+    </div>
+
+    <!-- Messages -->
+    <div *ngFor="let msg of messages"
+         class="flex"
+         [class.justify-end]="msg.senderRole === 'EMPLOYEE'"
+         [class.justify-start]="msg.senderRole === 'ADMIN'">
+
+      <!-- Avatar ADMIN -->
+      <div *ngIf="msg.senderRole === 'ADMIN'"
+           class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-sm mr-2 flex-shrink-0">
+        👨‍💼
+      </div>
+
+      <!-- Bulle -->
+      <div
+        class="max-w-xs lg:max-w-md px-4 py-2 rounded-2xl text-sm"
+        [class.bg-blue-500]="msg.senderRole === 'EMPLOYEE'"
+        [class.rounded-br-sm]="msg.senderRole === 'EMPLOYEE'"
+        [class.bg-blue-800]="msg.senderRole === 'ADMIN'"
+        [class.rounded-bl-sm]="msg.senderRole === 'ADMIN'"
+      >
+        <p>{{ msg.text }}</p>
+
+        <!-- Heure + ✔✔ -->
+        <div class="flex items-center justify-end gap-1 mt-1">
+          <span class="text-xs opacity-60">
+            {{ formatTime(msg.timestamp) }}
+          </span>
+
+          <!-- ✔✔ pour technicien -->
+          <span
+            *ngIf="msg.senderRole === 'EMPLOYEE'"
+            class="text-xs font-bold"
+            [class.text-green-400]="msg.read"
+            [class.text-blue-200]="!msg.read"
+          >
+            {{ msg.read ? '✓✓' : '✓' }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Input -->
+  <div class="p-4 border-t border-blue-800 flex gap-3">
+    <input
+      [(ngModel)]="newMessage"
+      (keydown.enter)="sendMessage()"
+      placeholder="Écrire un message à l'admin..."
+      class="flex-1 bg-blue-800 border border-blue-600 rounded-full px-4 py-2 text-sm outline-none focus:border-blue-400 transition"
+    />
+
+    <button
+      (click)="sendMessage()"
+      [disabled]="!newMessage.trim()"
+      class="bg-blue-500 hover:bg-blue-400 disabled:opacity-40 px-5 py-2 rounded-full text-sm font-semibold transition"
+    >
+      ➤
+    </button>
+  </div>
+
+</div>

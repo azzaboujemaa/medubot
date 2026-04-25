@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../services/employee';
 import { BeachService } from '../services/beach';
 import { EmployeeProfile } from '../models/employee-profile';
+import { getDatabase, ref, set } from 'firebase/database';
+import { getApp } from 'firebase/app';
 
 @Component({
   selector: 'app-profile',
@@ -44,17 +46,23 @@ export class Profile implements OnInit {
     });
   }
 
- async saveProfile() {
+async saveProfile() {
+  if (!this.user) return;
 
-  // 🔒 Vérification obligatoire
-  if (!this.user) {
-    return;
-  }
-
+  // Sauvegarde Firestore (déjà fait)
   await this.employeeService.updateMyProfile(
     this.user.robotId || '',
-    this.user.zone || ''
+    this.user.zone    || ''
   );
+
+  // ✅ Sauvegarde aussi dans Realtime Database → mobile se met à jour
+  const db  = getDatabase(getApp());
+  const key = this.user.email.replace(/[.@]/g, '_');
+  await set(ref(db, `profil/${key}`), {
+    robot:     { id: this.user.robotId, name: this.user.robotId },
+    beach:     { id: this.user.zone,    name: this.user.zone },
+    timestamp: Date.now(),
+  });
 
   alert('Profil mis à jour ✅');
 }
