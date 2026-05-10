@@ -46,6 +46,7 @@ export class SidebarAdmin implements OnInit, OnDestroy {
 
   goAdminDashboard()     { this.router.navigate(['/admin/dashboard']);             }
   goRobots()             { this.router.navigate(['/admin/dashboard']);             }
+  goMissions() { this.router.navigate(['/admin/missions']); }
   goMap()                { this.router.navigate(['/admin/robots-map']);            }
   goEmployees()          { this.router.navigate(['/admin/employees']);             }
   goCreateEmployee()     { this.modal.openCreateAccount();                         }

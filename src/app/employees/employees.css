@@ -17,13 +17,14 @@
 }
 
 .btn-add {
-  background:  #ffd166;
+  background: #ffd166;
   color: #0b1c3d;
   border: none;
   padding: 10px 16px;
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
 .btn-add:hover {
@@ -37,11 +38,11 @@
   overflow: hidden;
 }
 
-/* HEADER ROW */
+/* HEADER ROW + DATA ROW — 4 colonnes */
 .table-header,
 .table-row {
   display: grid;
-  grid-template-columns: 2fr 3fr 2fr 2fr 1.5fr 1fr;
+  grid-template-columns: 2fr 3fr 2fr 1fr;
   padding: 14px 18px;
   align-items: center;
 }
@@ -55,6 +56,7 @@
 /* DATA ROW */
 .table-row {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.15s ease;
 }
 
 .table-row:hover {
@@ -86,4 +88,16 @@
 
 .btn-delete {
   color: #ff6b6b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .employees-page {
+    padding: 20px;
+  }
 }

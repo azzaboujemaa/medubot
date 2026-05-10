@@ -20,6 +20,11 @@
       <span *ngIf="isOpen">Robots</span>
     </div>
 
+<div class="sidebar-item" (click)="goMissions()">
+  <i class="fas fa-clipboard-list"></i>
+  <span *ngIf="isOpen">Missions</span>
+</div>
+
    <div
   class="sidebar-item"
   routerLink="/admin/robots-map"

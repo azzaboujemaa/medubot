@@ -12,14 +12,11 @@ import {
 
 import { Observable } from 'rxjs';
 
-/* ✅ Interface propre (en dehors du composant) */
 interface Employee {
-  id: string;   // 🔥 ID Firestore
+  id: string;
   name: string;
   email: string;
-  role: 'ADMIN' | 'EMPLOYEE' | 'OPERATOR' | 'MAINTENANCE';
-  robotId ?: string;
-  zone?: string; 
+  role: 'ADMIN' | 'EMPLOYEE';
   active: boolean;
   createdAt?: any;
 }
@@ -33,7 +30,6 @@ interface Employee {
 })
 export class EmployeesComponent implements OnInit {
 
-  /* 🔥 Stream Firestore */
   employees$!: Observable<Employee[]>;
 
   constructor(
@@ -41,46 +37,32 @@ export class EmployeesComponent implements OnInit {
     private firestore: Firestore
   ) {}
 
-  /* 🔄 Chargement temps réel */
   ngOnInit() {
     const ref = collection(this.firestore, 'employees');
-
     this.employees$ = collectionData(ref, {
       idField: 'id'
     }) as Observable<Employee[]>;
   }
 
-  /* ➕ Ajouter */
   addEmployee() {
     this.modal.openCreateAccount();
   }
 
-  /* 🗑️ Supprimer (Firestore) */
- async deleteEmployee(id: string) {
-
-  const ok = confirm(
-    '⚠️ Voulez-vous vraiment supprimer cet employé ?'
-  );
-
-  if (!ok) {
-    return; // ❌ annuler la suppression
+  async deleteEmployee(id: string) {
+    const ok = confirm('⚠️ Voulez-vous vraiment supprimer cet employé ?');
+    if (!ok) return;
+    await deleteDoc(doc(this.firestore, `employees/${id}`));
   }
 
-  // ✅ supprimer après permission
-  await deleteDoc(doc(this.firestore, `employees/${id}`));
-}
-
-  /* 🎭 Label rôle */
   getRoleLabel(role: string): string {
     switch (role) {
-      
-      case 'OPERATOR': return 'Opérateur';
-      case 'MAINTENANCE': return 'Maintenance';
-      default: return 'Employé';
+      case 'ADMIN':       return 'Admin';
+      case 'EMPLOYEE':    return 'Employé';
+      default:            return 'Employé';
     }
   }
-  editEmployee(emp: Employee) {
-  this.modal.openEditEmployee(emp);
-}
 
+  editEmployee(emp: Employee) {
+    this.modal.openEditEmployee(emp);
+  }
 }

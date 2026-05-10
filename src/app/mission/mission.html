@@ -1,0 +1,152 @@
+<div class="dashboard">
+
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Missions <span>MeduBot</span></h1>
+        <p>Suivi en temps réel des missions actives</p>
+      </div>
+      <button class="add-btn" (click)="openModal()">
+        ➕ Nouvelle mission
+      </button>
+    </div>
+  </header>
+
+  <section class="mission-cards">
+
+   @for (m of missions; track m.docId) {
+  <div class="mission-card">
+
+ <div class="robot-header">
+  <h3>MeduBot {{ m.robotId }}</h3>
+  
+  <span class="status" [ngClass]="getStatusClass(m.status)">
+    {{ getStatusLabel(m.status) }}
+  </span>
+
+</div>
+  <div class="tech-row">
+  👤 {{ m.employeeName }}
+</div>
+
+
+
+    <div class="mission-stats">
+      <div class="stat-box">
+        <span>Zone</span>
+        <strong>{{ m.zone }}</strong>
+      </div>
+      <div class="stat-box">
+        <span>Statut</span>
+        <strong>{{ getStatusLabel(m.status) }}</strong>
+      </div>
+      <div class="stat-box">
+        <span>Début</span>
+        <strong>{{ m.startDate }}</strong>
+      </div>
+      <div class="stat-box">
+        <span>Fin</span>
+        <strong>{{ m.endDate || '—' }}</strong>
+      </div>
+    </div>
+
+   <div style="display:flex; justify-content:flex-end; margin-top:16px;">
+  <button class="btn-delete" (click)="deleteMission(m.docId)">
+  Supprimer
+</button>
+</div>
+
+  </div>
+}
+
+    @if (missions.length === 0) {
+      <p style="color: rgba(230,236,255,0.5); padding: 2rem;">
+        Aucune mission trouvée.
+      </p>
+    }
+
+  </section>
+
+</div>
+
+<!-- MODAL -->
+@if (showModal) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>Nouvelle mission</h2>
+        <button class="close-btn" (click)="closeModal()">✖</button>
+      </div>
+
+      <form (ngSubmit)="addMission()">
+
+       <!-- ROBOT -->
+<div class="form-group">
+  <label>Robot</label>
+  <select [(ngModel)]="newMission.robotId" name="robotId" required>
+    <option value="" disabled selected>Choisir un robot</option>
+    @for (robot of robotsDisponibles; track robot.docId) {
+      <option [value]="robot.id">
+        MeduBot {{ robot.id }}
+      </option>
+    }
+  </select>
+  @if (robotsDisponibles.length === 0) {
+    <small style="color:#ff6b6b;">Tous les robots sont en mission.</small>
+  }
+</div>
+
+<!-- TECHNICIEN -->
+<div class="form-group">
+  <label>Technicien</label>
+  <select [(ngModel)]="newMission.employeeName" name="employeeName" required>
+    <option value="" disabled selected>Choisir un technicien</option>
+    @for (emp of employeesDisponibles; track emp.id) {
+      <option [value]="emp.name">
+        {{ emp.name }} — {{ emp.email }}
+      </option>
+    }
+  </select>
+  @if (employeesDisponibles.length === 0) {
+    <small style="color:#ff6b6b;">Tous les techniciens sont en mission.</small>
+  }
+</div>
+
+       <!-- ZONE -->
+<div class="form-group">
+  <label>Zone de plage</label>
+
+  @if (zonesLoading) {
+    <select disabled>
+      <option>Chargement des plages...</option>
+    </select>
+  } @else {
+    <select [(ngModel)]="newMission.zone" name="zone" required>
+      <option value="" disabled selected>Choisir une zone</option>
+      @for (z of zones; track z) {
+        <option [value]="z">{{ z }}</option>
+      }
+    </select>
+  }
+
+</div>
+
+      <p style="font-size:13px; color:rgba(255,255,255,0.5); margin-bottom:16px;">
+  ℹ️ La date de début sera automatiquement définie au moment du lancement.
+</p>
+
+
+        <!-- INFO STATUT -->
+        <p style="font-size:13px; color:rgba(255,255,255,0.5); margin-bottom:16px;">
+          ℹ️ Le statut sera automatiquement défini à <strong>En cours</strong>.
+        </p>
+
+        <button type="submit" class="save-btn">
+          Ajouter la mission
+        </button>
+
+      </form>
+    </div>
+  </div>
+}

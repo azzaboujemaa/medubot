@@ -18,31 +18,14 @@
       disabled
     />
 
-    <!-- 🤖 ROBOT (LISTE) -->
-    <label>ID Robot</label>
-    <select [(ngModel)]="employee.robotId">
-      <option value="" disabled>Choisir un robot</option>
-      <option *ngFor="let r of robotIds" [value]="r">
-        {{ r }}
-      </option>
-    </select>
+ 
 
-    <!-- 🏖️ ZONE (API) -->
-    <label>Zone de plage</label>
-    <select [(ngModel)]="employee.zone">
-      <option value="" disabled>Choisir une zone</option>
-      <option *ngFor="let z of zones" [value]="z">
-        {{ z }}
-      </option>
-    </select>
+ 
 
     <!-- Rôle -->
     <label>Rôle</label>
     <select [(ngModel)]="employee.role">
       <option value="EMPLOYEE">Employé</option>
-      <option value="ADMIN">Admin</option>
-      <option value="OPERATOR">Opérateur</option>
-      <option value="MAINTENANCE">Maintenance</option>
     </select>
 
     <!-- Actions -->

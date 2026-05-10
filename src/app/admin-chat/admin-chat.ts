@@ -41,7 +41,7 @@ interface Conversation {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './admin-chat.html',
-  styleUrl: './admin-chat.css',
+  styleUrls: ['./admin-chat.css']
 })
 export class AdminChat implements OnInit, OnDestroy {
 

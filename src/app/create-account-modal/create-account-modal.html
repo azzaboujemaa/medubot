@@ -32,29 +32,12 @@
     <!-- ROLE -->
     <label>Rôle</label>
     <select [(ngModel)]="employee.role" name="role" required>
-      <option value="ADMIN">Admin</option>
       <option value="EMPLOYEE">Employé</option>
-      <option value="OPERATOR">Opérateur</option>
-      <option value="MAINTENANCE">Maintenance</option>
+      
+      
     </select>
 
-    <!-- ID ROBOT -->
-    <label>ID Robot</label>
-    <select [(ngModel)]="robotId" name="robotId" required>
-      <option value="" disabled selected>Choisir un robot</option>
-      <option *ngFor="let id of robotIds" [value]="id">
-        {{ id }}
-      </option>
-    </select>
 
-    <!-- ZONE -->
-    <label>Zone de plage</label>
-    <select [(ngModel)]="zone" name="zone" required>
-      <option value="" disabled selected>Choisir une zone</option>
-      <option *ngFor="let z of zones" [value]="z">
-        {{ z }}
-      </option>
-    </select>
 
     <!-- MOT DE PASSE -->
     <label>Mot de passe</label>

@@ -1,45 +1,150 @@
-
-
 <div class="dashboard">
 
   <!-- HEADER -->
   <header class="header">
-    <h1>
-     Dashboard intelligent <span>MeduBot</span>
-    </h1>
-    <p>Suivi en temps réel des robots marins et analyse de l’impact environnemental des opérations</p>
+
+    <div class="header-top">
+
+      <div>
+        <h1>
+          Dashboard intelligent <span>MeduBot</span>
+        </h1>
+
+        <p>
+          Suivi en temps réel des robots marins
+        </p>
+      </div>
+
+      <!-- BUTTON -->
+      <button class="add-btn" (click)="openModal()">
+        ➕ Ajouter Robot
+      </button>
+
+    </div>
+
   </header>
 
-  <!-- ROBOT CARDS -->
+  <!-- ROBOTS -->
   <section class="robot-cards">
+
     <div class="robot-card" *ngFor="let bot of medubots">
 
       <div class="robot-header">
-        <div class="robot-icon">🤖</div>
-        <span class="status" [ngClass]="getStatusClass(bot.status)">
+
+        <div class="robot-icon">
+          🤖
+        </div>
+
+        <span
+          class="status"
+          [ngClass]="getStatusClass(bot.status)"
+        >
           {{ getStatusLabel(bot.status) }}
         </span>
+
       </div>
 
-      <h3>MeduBot {{ bot.id }}</h3>
-      <p class="zone">📍 {{ bot.zone }}</p>
+      <h3>
+        MeduBot {{ bot.id }}
+      </h3>
 
       <div class="robot-stats">
-        <div>
+
+        <div class="stat-box">
           <span>Batterie</span>
           <strong>{{ bot.battery }}%</strong>
         </div>
-        <div>
+
+        <div class="stat-box">
           <span>Méduses</span>
           <strong>{{ bot.jellyfish }}</strong>
         </div>
-        <div>
-          <span>Score Éco</span>
-          <strong class="eco">{{ bot.ecoScore }}</strong>
-        </div>
+
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="robot-actions">
+
+        <button
+          class="delete-btn"
+          (click)="deleteRobot(bot.firebaseId)"
+        >
+           Supprimer
+        </button>
+
       </div>
 
     </div>
+
   </section>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" *ngIf="showModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2>Ajouter Robot</h2>
+
+      <button class="close-btn" (click)="closeModal()">
+        ✖
+      </button>
+
+    </div>
+
+    <form (ngSubmit)="addRobot()">
+
+      <div class="form-group">
+
+        <label>ID Robot</label>
+
+        <input
+          type="text"
+          [(ngModel)]="newRobot.id"
+          name="id"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Status</label>
+
+        <select
+          [(ngModel)]="newRobot.status"
+          name="status"
+        >
+
+          <option value="MISSION">
+            En mission
+          </option>
+
+          <option value="BREAKDOWN">
+            En panne
+          </option>
+
+          <option value="ALERT">
+            Alerte
+          </option>
+
+          <option value="OFFLINE">
+            Hors ligne
+          </option>
+
+        </select>
+
+      </div>
+
+      <button type="submit" class="save-btn">
+        Ajouter
+      </button>
+
+    </form>
+
+  </div>
 
 </div>

@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { EmployeeService } from '../services/employee';
-import { BeachService } from '../services/beach';
 import { EmployeeProfile } from '../models/employee-profile';
-import { getDatabase, ref, set } from 'firebase/database';
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  doc
+} from 'firebase/firestore';
+
 import { getApp } from 'firebase/app';
 
 @Component({
@@ -17,53 +27,169 @@ import { getApp } from 'firebase/app';
 export class Profile implements OnInit {
 
   user: EmployeeProfile | null = null;
-  zones: string[] = [];
 
-  robotList = [
-    { id: 'MeduBot A01', name: 'MeduBot A01' },
-    { id: 'MeduBot A02', name: 'MeduBot A02' },
-    { id: 'MeduBot B01', name: 'MeduBot B01' },
-    { id: 'MeduBot C01', name: 'MeduBot C01' },
-    { id: 'MeduBot D01', name: 'MeduBot D01' }
-  ];
+  missionStatus = 'ACTIVE';
+
+  missionDocId = '';
+
+  missionStartDate = '';
+
+  missionEndDate = '';
 
   constructor(
-    private employeeService: EmployeeService,
-    private beach: BeachService
+    private employeeService: EmployeeService
   ) {}
 
+  // ==========================
+  // INIT
+  // ==========================
   async ngOnInit() {
-    this.user = await this.employeeService.getMyProfileUniversal();
-    this.loadBeaches();
+
+    this.user =
+      await this.employeeService
+        .getMyProfileUniversal();
+
+    if (this.user?.name) {
+
+      await this.loadMission(
+        this.user.name
+      );
+
+    }
+
   }
 
-  loadBeaches() {
-    this.beach.getBeachesTunisia().subscribe(res => {
-      this.zones = res.elements
-        .map((e: any) => e.tags?.name)
-        .filter(Boolean)
-        .slice(0, 50);
-    });
+  // ==========================
+  // LOAD MISSION
+  // ==========================
+  async loadMission(employeeName: string) {
+
+    const db = getFirestore(getApp());
+
+    const q = query(
+      collection(db, 'mission'),
+      where('employeeName', '==', employeeName)
+    );
+
+    const snap = await getDocs(q);
+
+    if (!snap.empty) {
+
+      const mission = snap.docs[0];
+
+      this.missionDocId = mission.id;
+
+      this.missionStatus =
+        mission.data()['status'] || 'ACTIVE';
+
+      this.missionStartDate =
+        mission.data()['startDate'] || '';
+
+      this.missionEndDate =
+        mission.data()['endDate'] || '';
+
+    }
+
   }
 
-async saveProfile() {
-  if (!this.user) return;
+  // ==========================
+  // SAVE MISSION
+  // ==========================
+  async saveMission() {
 
-  // Sauvegarde Firestore (déjà fait)
-  await this.employeeService.updateMyProfile(
-    this.user.robotId || '',
-    this.user.zone    || ''
-  );
+    if (!this.missionDocId) {
 
-  // ✅ Sauvegarde aussi dans Realtime Database → mobile se met à jour
-  const db  = getDatabase(getApp());
-  const key = this.user.email.replace(/[.@]/g, '_');
-  await set(ref(db, `profil/${key}`), {
-    robot:     { id: this.user.robotId, name: this.user.robotId },
-    beach:     { id: this.user.zone,    name: this.user.zone },
-    timestamp: Date.now(),
-  });
+      alert('⚠️ Aucune mission trouvée.');
+      return;
 
-  alert('Profil mis à jour ✅');
-}
+    }
+
+    try {
+
+      const db = getFirestore(getApp());
+
+      const missionRef = doc(
+        db,
+        `mission/${this.missionDocId}`
+      );
+
+      // DATE + HEURE ACTUELLE
+      const now = new Date();
+
+      const currentDateTime =
+
+        now.toLocaleDateString('fr-FR')
+
+        + ' ' +
+
+        now.toLocaleTimeString('fr-FR', {
+
+          hour: '2-digit',
+          minute: '2-digit'
+
+        });
+
+      // ==========================
+      // SI TERMINÉE OU ANNULÉE
+      // ==========================
+      if (
+
+        this.missionStatus === 'COMPLETED'
+
+        ||
+
+        this.missionStatus === 'CANCELLED'
+
+      ) {
+
+        await updateDoc(missionRef, {
+
+          status: this.missionStatus,
+
+          endDate: currentDateTime
+
+        });
+
+      }
+
+      // ==========================
+      // SI ACTIVE
+      // ==========================
+      else {
+
+        await updateDoc(missionRef, {
+
+          status: this.missionStatus,
+
+          startDate: currentDateTime,
+
+          endDate: null
+
+        });
+
+      }
+
+      alert('✅ Mission mise à jour !');
+
+      // RELOAD
+      if (this.user?.name) {
+
+        await this.loadMission(
+          this.user.name
+        );
+
+      }
+
+    }
+
+    catch (err) {
+
+      console.error(err);
+
+      alert('❌ Erreur lors de la mise à jour.');
+
+    }
+
+  }
+
 }
