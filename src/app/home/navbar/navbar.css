@@ -92,3 +92,24 @@
   background-color: #2563eb;
   color: white;
 }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 34, 64, 0.72);
+  z-index: 1000;
+}
+
+.modal-box {
+  position: fixed;
+  z-index: 2000;
+}
+
+.forgot-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}

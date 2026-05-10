@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { Modal } from '../../services/modal';
 import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
-
+import { ForgotPasswordComponent } from '../../forget-password/forget-password';
 @Component({
   selector: 'app-navbar',
   standalone: true,
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, ForgotPasswordComponent]
 })
 export class Navbars implements AfterViewInit {
 

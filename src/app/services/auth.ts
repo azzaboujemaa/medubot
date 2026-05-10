@@ -5,7 +5,8 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  User
+  User,
+  sendPasswordResetEmail
 } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { EmployeeProfile } from '../models/employee-profile';
@@ -118,7 +119,9 @@ export class AuthService {
 
     throw new Error('Profil introuvable');
   }
-
+forgotPassword(email: string) {
+    return sendPasswordResetEmail(this.auth, email);
+  }
   // =========================
   // 🚪 LOGOUT
   // =========================

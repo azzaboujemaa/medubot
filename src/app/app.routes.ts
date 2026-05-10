@@ -23,6 +23,7 @@ import { Environnement } from './home/environnement/environnement';
 import { NotreMission } from './home/notre-mission/notre-mission';
 import { AdminChat } from './admin-chat/admin-chat';
 import { MissionDashboard } from './mission/mission';
+import { ForgotPasswordComponent } from './forget-password/forget-password';
 
 export const routes: Routes = [
 
@@ -65,6 +66,7 @@ export const routes: Routes = [
     ]
   },
      { path: '**', redirectTo: 'dashboard' },
+     {path:'forget-password', component: ForgotPasswordComponent}
 ];
 
 
