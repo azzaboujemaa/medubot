@@ -29,6 +29,7 @@ private _showForgotPassword = new BehaviorSubject<boolean>(false);
     this._showCreateAccount.next(false);
     this._showPartner.next(false);
     this._editEmployee.next(null);
+    this._showForgotPassword.next(false);
   }
   openPartner() {
   this._showPartner.next(true);
