@@ -64,7 +64,12 @@
 
       <!-- ACTIONS -->
       <div class="robot-actions">
-
+           <button
+    class="edit-btn"
+    (click)="editRobot(bot)"
+  >
+    Modifier
+  </button>
         <button
           class="delete-btn"
           (click)="deleteRobot(bot.firebaseId)"

@@ -123,7 +123,23 @@ export class AdminDashboard implements OnInit {
     }
 
   }
+editRobot(bot: any) {
 
+  this.newRobot = {
+
+    id: bot.id,
+
+    status: bot.status,
+
+    battery: bot.battery,
+
+    jellyfish: bot.jellyfish
+
+  };
+
+  this.showModal = true;
+
+}
   // ==========================
   // DELETE ROBOT
   // ==========================
